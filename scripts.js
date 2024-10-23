@@ -12,11 +12,12 @@ const valueCards = document.querySelectorAll('.value-card');
 toggleButton.addEventListener('click', () => {
     navbarLinks.classList.toggle('active');
 });
-window.addEventListener('load', () => {
+document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.fade-in').forEach(element => {
         element.classList.add('show');
     });
 });
+
 
 // Fade-in effect when scrolling
 window.addEventListener('scroll', () => {
