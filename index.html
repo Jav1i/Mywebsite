@@ -554,7 +554,7 @@
     }
   </style>
 </head>
-<body class="light-mode">
+<body class="dark-mode">
   <!-- ===================== Navbar ===================== -->
   <nav class="navbar">
     <div class="brand-title">Duelund-Jensen</div>
@@ -732,10 +732,6 @@
       document.body.classList.toggle('dark-mode');
       document.body.classList.toggle('light-mode');
     });
-    // Set initial theme (default light-mode)
-    if (!document.body.classList.contains('dark-mode') && !document.body.classList.contains('light-mode')) {
-      document.body.classList.add('light-mode');
-    }
     
     // Fade-in on Load for Sections
     document.addEventListener('DOMContentLoaded', () => {
