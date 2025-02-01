@@ -1,142 +1,832 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Philip Jensen | Consulting and Management</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Philip Jensen | Consulting and Management</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    /* ===========================
+       Global Reset and Base Styles
+    =========================== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.6;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    /* Light mode (default) */
+    body.light-mode {
+      background: #f0f0f0;
+      color: #333;
+    }
+    /* Dark mode */
+    body.dark-mode {
+      background: #1a1a1a;
+      color: #ddd;
+    }
+    
+    /* ===========================
+       Navbar Styles
+    =========================== */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1100;
+      transition: background 0.3s;
+    }
+    body.dark-mode .navbar {
+      background: rgba(26, 26, 26, 0.95);
+    }
+    .navbar .brand-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: #008080; /* teal accent */
+    }
+    .navbar .navbar-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+    .navbar .navbar-links ul {
+      list-style: none;
+      display: flex;
+    }
+    .navbar .navbar-links a {
+      text-decoration: none;
+      color: #555;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: 25px;
+      transition: background 0.3s, color 0.3s;
+    }
+    body.dark-mode .navbar .navbar-links a {
+      color: #bbb;
+    }
+    .navbar .navbar-links a:hover {
+      background: #008080;
+      color: #fff;
+    }
+    /* Toggle button for mobile navigation */
+    .toggle-button {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+    .toggle-button .bar {
+      width: 25px;
+      height: 3px;
+      background-color: #555;
+      margin: 4px;
+      transition: 0.3s;
+    }
+    /* Light/Dark Mode Toggle Button */
+    .theme-toggle {
+      border: none;
+      background: none;
+      cursor: pointer;
+      font-size: 1.25rem;
+      color: #008080;
+      transition: color 0.3s;
+      margin-right: 1rem;
+    }
+    body.dark-mode .theme-toggle {
+      color: #ddd;
+    }
+    .theme-toggle:hover {
+      color: #005e5e;
+    }
+    
+    /* ===========================
+       Section Base Styles & Animations
+    =========================== */
+    .section {
+      padding: 120px 20px 60px;
+      text-align: center;
+      min-height: 100vh;
+      position: relative;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .section.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    /* Alternate background for contrast */
+    .section:nth-child(even) {
+      background: #fafafa;
+    }
+    body.dark-mode .section:nth-child(even) {
+      background: #2a2a2a;
+    }
+    
+    /* ===========================
+       Hero Section with Background Zoom & Elegant Fade-In
+    =========================== */
+    #home {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      color: #fff;
+      animation: fadeIn 1s ease-out forwards;
+    }
+    /* Background image with overlay */
+    #home::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://images.unsplash.com/photo-1515169067865-5387ec356754?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80') no-repeat center center/cover;
+      z-index: -2;
+      filter: brightness(0.6);
+      transition: transform 0.5s ease-out;
+    }
+    /* Elegant fade-in keyframes */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    /* Extra ripple effect element */
+    .ripple {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      border: 4px solid;
+      /* In light mode, use teal; in dark mode, use light gray */
+      border-color: #008080;
+      border-radius: 50%;
+      animation: rippleEffect 3s ease-out infinite;
+      z-index: -1;
+    }
+    body.dark-mode .ripple {
+      border-color: #ddd;
+    }
+    @keyframes rippleEffect {
+      0% {
+        transform: scale(0.8);
+        opacity: 0.8;
+      }
+      100% {
+        transform: scale(1.8);
+        opacity: 0;
+      }
+    }
+    #home h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+    #home p {
+      font-size: 1.25rem;
+      color: #f0f0f0;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    }
+    
+    /* ===========================
+       CTA Button Styles
+    =========================== */
+    .cta-container {
+      margin: 2rem 0;
+      text-align: center;
+    }
+    .cta-button {
+      display: inline-block;
+      background: linear-gradient(45deg, #008080, #008080);
+      color: #fff;
+      padding: 0.75rem 1.5rem;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .cta-button:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+    
+    /* ===========================
+       About Section Styles
+    =========================== */
+    #about {
+      background: #fff;
+      color: #333;
+    }
+    body.dark-mode #about {
+      background: #333;
+      color: #ddd;
+    }
+    #about h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: #008080;
+    }
+    .about-container {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+    .about-card {
+      background: #f9f9f9;
+      border-radius: 15px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+      flex: 1;
+      max-width: 300px;
+      min-width: 250px;
+      text-align: center;
+      margin: 1rem;
+      cursor: pointer;
+    }
+    body.dark-mode .about-card {
+      background: #444;
+      color: #eee;
+    }
+    .about-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: #008080;
+    }
+    .about-card p {
+      font-size: 1rem;
+      color: #666;
+    }
+    body.dark-mode .about-card p {
+      color: #ccc;
+    }
+    .about-card:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+    }
+    
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1200;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 15px;
+      max-width: 500px;
+      width: 90%;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      text-align: center;
+      position: relative;
+      color: #333;
+    }
+    body.dark-mode .modal-content {
+      background: #222;
+      color: #ddd;
+    }
+    .close {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      font-size: 1.5rem;
+      color: #888;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+    .close:hover {
+      color: #333;
+    }
+    
+    /* ===========================
+       Experience Section Styles
+    =========================== */
+    #services {
+      background: #fafafa;
+      color: #333;
+    }
+    body.dark-mode #services {
+      background: #2a2a2a;
+      color: #ddd;
+    }
+    #services h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: #008080;
+    }
+    .values-container {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+    .value-card {
+      background: #fff;
+      border-radius: 15px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      transition: transform 0.5s, opacity 0.5s;
+      flex: 1;
+      max-width: 300px;
+      min-width: 250px;
+      opacity: 0;
+      transform: translateX(50px);
+    }
+    body.dark-mode .value-card {
+      background: #555;
+      color: #eee;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    }
+    .slide-in-left {
+      transform: translateX(-50px);
+    }
+    .show.slide-in-left, .show.slide-in-right {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    .value-card:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+    }
+    
+    /* ===========================
+       Timeline Section Styles
+    =========================== */
+    /* For light mode, timeline background and markers use teal; in dark mode, the section background is the same as others (#2a2a2a) and the event boxes use a contrasting dark gray (#444) */
+    body.light-mode #timeline {
+      background: #fff;
+      color: #333;
+    }
+    body.light-mode #timeline h2 {
+      color: #008080;
+    }
+    body.light-mode .timeline::after {
+      background-color: #008080;
+    }
+    body.light-mode .timeline-event {
+      background: #fafafa;
+      color: #333;
+    }
+    body.light-mode .timeline-event::after {
+      background-color: #008080;
+      border: 4px solid #fff;
+    }
+    body.light-mode .timeline-content h3 {
+      color: #008080;
+    }
+    
+    body.dark-mode #timeline {
+      background: #2a2a2a;
+      color: #ddd;
+    }
+    body.dark-mode #timeline h2 {
+      color: #ddd;
+    }
+    body.dark-mode .timeline::after {
+      background-color: #ddd;
+    }
+    body.dark-mode .timeline-event {
+      background: #444;
+      color: #ddd;
+    }
+    body.dark-mode .timeline-event::after {
+      background-color: #ddd;
+      border: 4px solid #2a2a2a;
+    }
+    body.dark-mode .timeline-content h3 {
+      color: #ddd;
+    }
+    .timeline {
+      position: relative;
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 40px 0;
+    }
+    .timeline::after {
+      content: '';
+      position: absolute;
+      width: 4px;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      margin-left: -2px;
+    }
+    .timeline-event {
+      padding: 20px 30px;
+      position: relative;
+      border-radius: 6px;
+      width: 45%;
+      margin: 10px 0;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s, transform 0.6s;
+    }
+    .timeline-event.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .timeline-event::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      top: 20px;
+      border-radius: 50%;
+      z-index: 1;
+    }
+    .timeline-event:nth-child(odd) {
+      left: 0;
+    }
+    .timeline-event:nth-child(odd)::after {
+      left: -10px;
+    }
+    .timeline-event:nth-child(even) {
+      left: 55%;
+    }
+    .timeline-event:nth-child(even)::after {
+      right: -10px;
+    }
+    .timeline-content {
+      padding: 10px 20px;
+    }
+    .timeline-content h3 {
+      margin-bottom: 0.5rem;
+      font-family: 'Playfair Display', serif;
+    }
+    
+    /* ===========================
+       Contact Section Styles
+    =========================== */
+    #contact {
+      background: #fafafa;
+      color: #333;
+    }
+    body.dark-mode #contact {
+      background: #2a2a2a;
+      color: #ddd;
+    }
+    #contact h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: #008080;
+    }
+    .contact-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+      text-align: center;
+    }
+    .contact-card {
+      background: #fff;
+      border-radius: 15px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    body.dark-mode .contact-card {
+      background: #444;
+    }
+    .contact-card i {
+      font-size: 2.5rem;
+      color: #008080;
+    }
+    .contact-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    }
+    .contact-card a {
+      text-decoration: none;
+      color: #555;
+      transition: color 0.3s;
+    }
+    body.dark-mode .contact-card a {
+      color: #bbb;
+    }
+    .contact-card a:hover {
+      color: #008080;
+    }
+    .cv-download {
+      text-align: center;
+      margin-top: 2rem;
+    }
+    .download-cv {
+      background: #008080;
+      color: #fff;
+      padding: 0.75rem 1.5rem;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: background 0.3s, transform 0.3s;
+    }
+    .download-cv:hover {
+      background: #006666;
+      transform: translateY(-3px);
+    }
+  </style>
 </head>
-<body>
-    <nav class="navbar">
-        <div class="brand-title">Duelund-Jensen</div>
-        <a href="#" class="toggle-button">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-        </a>
-        <div class="navbar-links">
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About Me</a></li>
-                <li><a href="#services">Experience</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <section id="home" class="section fade-in">
+<body class="light-mode">
+  <!-- ===================== Navbar ===================== -->
+  <nav class="navbar">
+    <div class="brand-title">Duelund-Jensen</div>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle Theme">
+      <i class="fas fa-adjust"></i>
+    </button>
+    <a href="#" class="toggle-button">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </a>
+    <div class="navbar-links">
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About Me</a></li>
+        <li><a href="#services">Experience</a></li>
+        <li><a href="#timeline">Timeline</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+  
+  <!-- ===================== Hero Section ===================== -->
+  <section id="home" class="section">
+    <!-- Extra ripple element for interest -->
+    <div class="ripple"></div>
     <h2 id="home-title"></h2>
     <p id="home-subtitle">Economic Sciences Student at the University of St.Gallen</p>
-    <div class="particle-container">
-        <div class="wave"></div>
-        <div class="wave"></div>
-        <div class="wave"></div>
+    <div class="cta-container">
+      <a href="#contact" class="cta-button">Get in Touch</a>
     </div>
-    <div class="explosion-container"></div>
-    <div class="cool-animation"></div>
-</section>
-
- <section id="about" class="section fade-in">
+  </section>
+  
+  <!-- ===================== About Section ===================== -->
+  <section id="about" class="section">
     <h2>About Me</h2>
     <div class="about-container">
-        <div class="about-card" data-modal="modal1">
-            <h3>My Background</h3>
-            <p>My journey in economic sciences and strategic management is grounded in both rigorous academics and practical experiences</p>
-        </div>
-        <div class="about-card" data-modal="modal2">
-            <h3>My Skills</h3>
-            <p>I combine analytical skills and strategic thinking to create data-driven solutions for complex challenges.</p>
-        </div>
-        <div class="about-card" data-modal="modal3">
-            <h3>My Hobbies</h3>
-            <p>My interests range from competitive sports to exploring new technologies and creative problem-solving.</p>
-        </div>
+      <div class="about-card" data-modal="modal1">
+        <h3>My Background</h3>
+        <p>My journey in economic sciences and strategic management is grounded in both rigorous academics and practical experiences.</p>
+      </div>
+      <div class="about-card" data-modal="modal2">
+        <h3>My Skills</h3>
+        <p>I combine analytical skills and strategic thinking to create data-driven solutions for complex challenges.</p>
+      </div>
+      <div class="about-card" data-modal="modal3">
+        <h3>My Hobbies</h3>
+        <p>When I'm not studying, you'll find me on the badminton court – playing and coaching with passion.</p>
+      </div>
     </div>
-    <div class="cool-animation"></div>
-
     <!-- Modals -->
     <div id="modal1" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h3>More About My Background</h3>
-            <p>I am an Economic Sciences student at the University of St. Gallen, focusing on consulting and strategic management. My academic journey has been complemented by hands-on experience through internships at Microsoft and collaborative coding projects, allowing me to blend theory with practice in dynamic business environments</p>
-        </div>
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h3>More About My Background</h3>
+        <p>I am an Economic Sciences student at the University of St. Gallen, focusing on consulting and strategic management. My academic journey has been complemented by hands-on experience through internships and collaborative projects.</p>
+      </div>
     </div>
-
     <div id="modal2" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h3>More About My Skills</h3>
-            <p>With a strong command of data analysis, strategic consulting, and software development, I excel in identifying opportunities for growth and innovation. My skills include developing iOS applications and implementing data-driven solutions, enhancing my ability to adapt and thrive in complex business landscapess</p>
-        </div>
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h3>More About My Skills</h3>
+        <p>I excel in data analysis, strategic consulting, and software development, identifying opportunities for growth and innovation.</p>
+      </div>
     </div>
-
     <div id="modal3" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h3>More About My Hobbies</h3>
-            <p>Outside of academics, I enjoy competitive sports and creative problem-solving. As a semi-professional badminton player and a coach, I’ve cultivated discipline and teamwork. My interest in coding extends beyond projects, allowing me to explore new technologies and stay updated on industry trends.</p>
-        </div>
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h3>More About My Hobbies</h3>
+        <p>When I'm not immersed in economic theories, I love playing and coaching badminton – it keeps me agile both mentally and physically.</p>
+      </div>
     </div>
-</section>
-
-    <section id="services" class="section fade-in">
+  </section>
+  
+  <!-- ===================== Experience Section ===================== -->
+  <section id="services" class="section">
     <h2>Experiences</h2>
-    <div class="cool-animation"></div>
     <div class="values-container">
-        <div class="value-card slide-in-left">
-            <h3>Microsoft Internship</h3>
-            <p>Jun 2019 – Jul 2019</p><br>
-            <p>At the Microsoft Technology Center, I gained insight into consulting and strategic decision-making through hands-on shadowing and daily engagement with tech-driven solutions.</p>
-        </div>
-        <div class="value-card slide-in-right">
-            <h3>Collaborative Coding Project</h3>
-            <p> May 2023 – Jun 2023 </p><br>
-            <p>I led a global coding project, enhancing my problem-solving and adaptability skills while integrating diverse perspectives in a dynamic development environment.</p>
-        </div>
-        <div class="value-card slide-in-left">
-            <h3>Semi-Professional Badminton Player & Head Coach</h3>
-            <p> Jan 2018 – May 2024 </p><br>
-            <p>As a player and coach, I developed leadership skills, managed a 50+ member team, and balanced strategic training with performance analysis</p>
-        </div>
+      <div class="value-card slide-in-left">
+        <h3>Microsoft Internship</h3>
+        <p>Jun 2019 – Jul 2019</p><br>
+        <p>Gained insight into consulting and strategic decision-making through hands-on shadowing at the Microsoft Technology Center.</p>
+      </div>
+      <div class="value-card slide-in-right">
+        <h3>Collaborative Coding Project</h3>
+        <p>May 2023 – Jun 2023</p><br>
+        <p>Led a global coding project that enhanced my problem-solving skills while integrating diverse perspectives.</p>
+      </div>
+      <div class="value-card slide-in-left">
+        <h3>Semi-Professional Badminton Player & Head Coach</h3>
+        <p>Jan 2018 – May 2024</p><br>
+        <p>Developed leadership, teamwork, and performance analysis skills while playing and coaching competitive badminton.</p>
+      </div>
     </div>
-</section>
-
-    <section id="contact" class="section fade-in">
+    <div class="cta-container">
+      <a href="#contact" class="cta-button">Let's Talk Business</a>
+    </div>
+  </section>
+  
+  <!-- ===================== Timeline Section ===================== -->
+  <section id="timeline" class="section">
+    <h2>My Journey</h2>
+    <div class="timeline">
+      <div class="timeline-event">
+        <div class="timeline-content">
+          <h3>2018</h3>
+          <p>Started my studies in Economic Sciences at the University of St. Gallen.</p>
+        </div>
+      </div>
+      <div class="timeline-event">
+        <div class="timeline-content">
+          <h3>2019</h3>
+          <p>Internship at Microsoft Technology Center, learning consulting and strategy.</p>
+        </div>
+      </div>
+      <div class="timeline-event">
+        <div class="timeline-content">
+          <h3>2023</h3>
+          <p>Led a global collaborative coding project, integrating diverse perspectives.</p>
+        </div>
+      </div>
+      <div class="timeline-event">
+        <div class="timeline-content">
+          <h3>2024</h3>
+          <p>Competed and coached in semi-professional badminton while pursuing my studies.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- ===================== Contact Section ===================== -->
+  <section id="contact" class="section">
     <h2>Get in Touch</h2>
     <div class="contact-container">
-        <div class="contact-card">
-            <i class="fas fa-envelope"></i>
-            <h3>Email</h3>
-            <p>Philip@Duelundjensen.com</p>
-        </div>
-        <div class="contact-card">
-            <i class="fab fa-linkedin"></i>
-            <h3>LinkedIn</h3>
-            <p><a href="https://www.linkedin.com/in/philip-jensen-407310192/ target="_blank">linkedin.com/Philip-Jensen</a></p>
-        </div>
-        <div class="contact-card">
-            <i class="fab fa-twitter"></i>
-            <h3>Twitter</h3>
-            <p><a href="https://twitter.com/your-profile" target="_blank">@Philip_Jensen</a></p>
-        </div>
-        <div class="contact-card">
-            <i class="fab fa-github"></i>
-            <h3>GitHub</h3>
-            <p><a href="https://github.com/jav1i" target="_blank">github.com/Jav1i</a></p>
-        </div>
+      <div class="contact-card">
+        <i class="fas fa-envelope"></i>
+        <h3>Email</h3>
+        <p>Philip@Duelundjensen.com</p>
+      </div>
+      <div class="contact-card">
+        <i class="fab fa-linkedin"></i>
+        <h3>LinkedIn</h3>
+        <p><a href="https://www.linkedin.com/in/philip-jensen-407310192/" target="_blank">linkedin.com/Philip-Jensen</a></p>
+      </div>
+      <div class="contact-card">
+        <i class="fab fa-twitter"></i>
+        <h3>Twitter</h3>
+        <p><a href="https://twitter.com/your-profile" target="_blank">@Philip_Jensen</a></p>
+      </div>
+      <div class="contact-card">
+        <i class="fab fa-github"></i>
+        <h3>GitHub</h3>
+        <p><a href="https://github.com/jav1i" target="_blank">github.com/Jav1i</a></p>
+      </div>
     </div>
     <div class="cv-download">
-        <a href="Philip_Jensen_Resume.pdf" class="download-cv" download>
-            <i class="fas fa-file-download"></i> Download My CV
-        </a>
+      <a href="Philip_Jensen_Resume.pdf" class="download-cv" download>
+        <i class="fas fa-file-download"></i> Download My CV
+      </a>
     </div>
-    <div class="cool-animation"></div>
-</section>
-
-
-    <script src="scripts.js"></script>
+  </section>
+  
+  <!-- ===================== JavaScript ===================== -->
+  <script>
+    // Toggle Navbar for Mobile
+    const toggleButton = document.querySelector('.toggle-button');
+    const navbarLinks = document.querySelector('.navbar-links');
+    toggleButton.addEventListener('click', () => {
+      navbarLinks.classList.toggle('active');
+    });
+    
+    // Light/Dark Mode Toggle
+    const themeToggle = document.getElementById('themeToggle');
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      document.body.classList.toggle('light-mode');
+    });
+    // Set initial theme (default light-mode)
+    if (!document.body.classList.contains('dark-mode') && !document.body.classList.contains('light-mode')) {
+      document.body.classList.add('light-mode');
+    }
+    
+    // Fade-in on Load for Sections
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.section').forEach(element => {
+        element.classList.add('show');
+      });
+    });
+    
+    // Fade-in on Scroll for Sections and Value Cards
+    const sections = document.querySelectorAll('.section');
+    const valueCards = document.querySelectorAll('.value-card');
+    window.addEventListener('scroll', () => {
+      const triggerBottom = window.innerHeight * 0.8;
+      sections.forEach(section => {
+        const sectionTop = section.getBoundingClientRect().top;
+        if (sectionTop < triggerBottom) {
+          section.classList.add('show');
+        } else {
+          section.classList.remove('show');
+        }
+      });
+      valueCards.forEach(card => {
+        const cardTop = card.getBoundingClientRect().top;
+        if (cardTop < triggerBottom) {
+          card.classList.add('show');
+        } else {
+          card.classList.remove('show');
+        }
+      });
+    });
+    
+    // Open Modals on About Card Click
+    const aboutCards = document.querySelectorAll('.about-card');
+    const modals = document.querySelectorAll('.modal');
+    const closeButtons = document.querySelectorAll('.close');
+    aboutCards.forEach(card => {
+      card.addEventListener('click', () => {
+        const modalId = card.getAttribute('data-modal');
+        const modal = document.getElementById(modalId);
+        modal.style.display = 'flex';
+      });
+    });
+    closeButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        button.closest('.modal').style.display = 'none';
+      });
+    });
+    window.addEventListener('click', (event) => {
+      modals.forEach(modal => {
+        if (event.target === modal) {
+          modal.style.display = 'none';
+        }
+      });
+    });
+    
+    // Typing Effect for Home Title
+    const homeTitle = document.getElementById('home-title');
+    const typingText = "Philip Jensen";
+    let typingIndex = 0;
+    function type() {
+      if (typingIndex < typingText.length) {
+        homeTitle.textContent += typingText.charAt(typingIndex);
+        typingIndex++;
+        setTimeout(type, 120);
+      }
+    }
+    window.onload = () => {
+      type();
+    };
+    
+    // Background Zoom on Scroll for Hero Section
+    const homeSection = document.getElementById('home');
+    window.addEventListener('scroll', () => {
+      const scrollPos = window.scrollY;
+      const scale = 1 + Math.min(scrollPos / 1000, 0.2);
+      homeSection.style.transform = `scale(${scale})`;
+    });
+    
+    // Animate Timeline Events on Scroll
+    const timelineEvents = document.querySelectorAll('.timeline-event');
+    window.addEventListener('scroll', () => {
+      const triggerBottom = window.innerHeight * 0.8;
+      timelineEvents.forEach(event => {
+        const eventTop = event.getBoundingClientRect().top;
+        if (eventTop < triggerBottom) {
+          event.classList.add('show');
+        } else {
+          event.classList.remove('show');
+        }
+      });
+    });
+  </script>
 </body>
 </html>
