@@ -155,8 +155,35 @@ addRoad(32, 2, 0, 0);
 addRoad(30, 1.2, 0, -10, false);
 addRoad(30, 1.2, 0,  10, false);
 
-// Dashed center line on the main road (continuous)
-addDashedLine(30, 0, 0, 'x');
+// N-S roads running between the building columns (no sidewalks — gap is tight)
+const nsWestX = -5.75;   // between west column (About/Coding) and center column (HSG/Badminton)
+const nsEastX =  4.3;    // between center column and east column (Microsoft/Contact)
+addRoad(1.8, 22, nsWestX, 0, false);
+addRoad(1.8, 22, nsEastX, 0, false);
+
+// Dashed center lines — skip the intersections with N-S roads
+// N-S road footprint in x: nsWestX ± 0.9 = [-6.65, -4.85], nsEastX ± 0.9 = [3.4, 5.2]
+// E-W road runs x = [-16, 16], split into 3 segments:
+addDashedLine(9,    -11.3, 0, 'x');  // x = [-16, -6.65]
+addDashedLine(7.8,  -0.72, 0, 'x');  // x = [-4.85, 3.4]
+addDashedLine(10.5,  10.6, 0, 'x');  // x = [5.2, 16]
+
+// N-S center lines — skip the E-W main intersection at z ∈ [-1, 1]
+addDashedLine(9, nsWestX, -5.5, 'z');
+addDashedLine(9, nsWestX,  5.5, 'z');
+addDashedLine(9, nsEastX, -5.5, 'z');
+addDashedLine(9, nsEastX,  5.5, 'z');
+
+// Crosswalks (well clear of the N-S road edges so they stay on the E-W main)
+addCrosswalk(nsWestX - 2.2, 0, 'x', 2);
+addCrosswalk(nsWestX + 2.2, 0, 'x', 2);
+addCrosswalk(nsEastX - 2.2, 0, 'x', 2);
+addCrosswalk(nsEastX + 2.2, 0, 'x', 2);
+// And on the N-S roads crossing the E-W main (past sidewalks)
+addCrosswalk(nsWestX, -2.7, 'z', 1.8);
+addCrosswalk(nsWestX,  2.7, 'z', 1.8);
+addCrosswalk(nsEastX, -2.7, 'z', 1.8);
+addCrosswalk(nsEastX,  2.7, 'z', 1.8);
 
 // ===========================
 // Buildings
@@ -773,8 +800,9 @@ function createCar(bodyColor = 0xd93838) {
   rear.position.set(-0.59, 0.65, 0);
   g.add(rear);
 
-  // wheels
+  // wheels (tracked for spin animation)
   const wheelR = 0.18, wheelW = 0.11;
+  const wheels = [];
   [[0.55, 0.42], [0.55, -0.42], [-0.55, 0.42], [-0.55, -0.42]].forEach(([x, z]) => {
     const wheel = new THREE.Mesh(
       new THREE.CylinderGeometry(wheelR, wheelR, wheelW, 14), wheelMat
@@ -782,7 +810,10 @@ function createCar(bodyColor = 0xd93838) {
     wheel.rotation.x = Math.PI / 2;
     wheel.position.set(x, wheelR, z);
     g.add(wheel);
+    wheels.push(wheel);
   });
+  g.userData.wheels = wheels;
+  g.userData.wheelRadius = wheelR;
 
   // headlights (front pair)
   [0.28, -0.28].forEach(z => {
@@ -800,10 +831,18 @@ function createCar(bodyColor = 0xd93838) {
   return g;
 }
 
-// Place the car on the E-W road, right-hand lane (south), heading east
-const car = createCar(0xd93838);
-car.position.set(-4, 0, -0.5);
-scene.add(car);
+// Two cars loop continuously in opposite lanes (right-hand traffic)
+const CAR_BOUND = 18;
+const cars = [
+  { color: 0xd93838, speed:  3.5, laneZ: -0.5 }, // red, east-bound on south lane
+  { color: 0x2c6fd0, speed: -3.2, laneZ:  0.5 }, // blue, west-bound on north lane
+].map(spec => {
+  const mesh = createCar(spec.color);
+  mesh.position.set(spec.speed > 0 ? -CAR_BOUND : CAR_BOUND, 0, spec.laneZ);
+  mesh.rotation.y = spec.speed > 0 ? 0 : Math.PI;
+  scene.add(mesh);
+  return { mesh, speed: spec.speed };
+});
 
 // ===========================
 // Controls
@@ -923,6 +962,21 @@ function animate() {
   pickables.forEach(b => {
     const target = b.userData.targetY ?? 0;
     b.position.y += (target - b.position.y) * Math.min(1, dt * 10);
+  });
+
+  // drive each car once across; hide it after it reaches the far edge
+  cars.forEach(c => {
+    if (!c.mesh.visible) return;
+    c.mesh.position.x += c.speed * dt;
+    const done = c.speed > 0
+      ? c.mesh.position.x >  CAR_BOUND
+      : c.mesh.position.x < -CAR_BOUND;
+    if (done) {
+      c.mesh.visible = false;
+      return;
+    }
+    const angVel = Math.abs(c.speed) / c.mesh.userData.wheelRadius;
+    c.mesh.userData.wheels.forEach(w => { w.rotation.y -= angVel * dt; });
   });
 
   controls.update();
