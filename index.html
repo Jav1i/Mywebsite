@@ -3,173 +3,85 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Philip Jensen | Consulting and Management</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <title>Philip Jensen</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
-<body class="dark-mode">
-  <!-- ===================== Navbar ===================== -->
-  <nav class="navbar">
-    <div class="brand-title">Duelund-Jensen</div>
-    <button class="theme-toggle" id="themeToggle" aria-label="Toggle Theme">
-      <i class="fas fa-adjust"></i>
-    </button>
-    <a href="#" class="toggle-button" aria-label="Toggle Navigation">
-      <span class="bar"></span>
-      <span class="bar"></span>
-      <span class="bar"></span>
-    </a>
-    <div class="navbar-links">
-      <ul>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#about">About Me</a></li>
-        <li><a href="#services">Experience</a></li>
-        <li><a href="#timeline">Timeline</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </div>
-  </nav>
+<body>
+  <header class="topbar">
+    <div class="brand">Philip Jensen</div>
+    <nav class="topnav">
+      <button class="nav-link" data-open="modal-about">About</button>
+      <button class="nav-link" data-open="modal-contact">Contact</button>
+    </nav>
+  </header>
 
-  <!-- ===================== Hero Section ===================== -->
-  <section id="home" class="section">
-    <div class="ripple"></div>
-    <h2 id="home-title"></h2>
-    <p id="home-subtitle">Economic Sciences Student at the University of St.Gallen</p>
-    <div class="cta-container">
-      <a href="#contact" class="cta-button">Get in Touch</a>
-    </div>
-  </section>
+  <main>
+    <div id="scene"></div>
+    <div class="hint">Click a building to explore · drag to look around</div>
+    <div id="tooltip" class="tooltip" hidden></div>
+    <div class="loading" id="loading">Loading…</div>
+  </main>
 
-  <!-- ===================== About Section ===================== -->
-  <section id="about" class="section">
+  <!-- ===== Modals ===== -->
+  <dialog id="modal-about" class="modal">
+    <button class="modal-close" aria-label="Close">&times;</button>
     <h2>About Me</h2>
-    <div class="about-container">
-      <div class="about-card" data-modal="modal1">
-        <h3>My Background</h3>
-        <p>My journey in economic sciences and strategic management is grounded in both rigorous academics and practical experiences.</p>
-      </div>
-      <div class="about-card" data-modal="modal2">
-        <h3>My Skills</h3>
-        <p>I combine analytical skills and strategic thinking to create data-driven solutions for complex challenges.</p>
-      </div>
-      <div class="about-card" data-modal="modal3">
-        <h3>My Hobbies</h3>
-        <p>When I'm not studying, you'll find me on the badminton court – playing and coaching with passion.</p>
-      </div>
-    </div>
-    <!-- Modals -->
-    <div id="modal1" class="modal">
-      <div class="modal-content">
-        <span class="close">&times;</span>
-        <h3>More About My Background</h3>
-        <p>I am an Economic Sciences student at the University of St. Gallen, focusing on consulting and strategic management. My academic journey has been complemented by hands-on experience through internships and collaborative projects.</p>
-      </div>
-    </div>
-    <div id="modal2" class="modal">
-      <div class="modal-content">
-        <span class="close">&times;</span>
-        <h3>More About My Skills</h3>
-        <p>I excel in data analysis, strategic consulting, and software development, identifying opportunities for growth and innovation.</p>
-      </div>
-    </div>
-    <div id="modal3" class="modal">
-      <div class="modal-content">
-        <span class="close">&times;</span>
-        <h3>More About My Hobbies</h3>
-        <p>When I'm not immersed in economic theories, I love playing and coaching badminton – it keeps me agile both mentally and physically.</p>
-      </div>
-    </div>
-  </section>
+    <p class="eyebrow">The Residence</p>
+    <p>I'm Philip — an Economic Sciences student at the University of St.&nbsp;Gallen,
+      focused on consulting and strategic management. My work sits at the intersection
+      of analytical thinking and practical problem-solving.</p>
+  </dialog>
 
-  <!-- ===================== Experience Section ===================== -->
-  <section id="services" class="section">
-    <h2>Experiences</h2>
-    <div class="values-container">
-      <div class="value-card slide-in-left">
-        <h3>Microsoft Internship</h3>
-        <p>Jun 2019 – Jul 2019</p><br>
-        <p>Gained insight into consulting and strategic decision-making through hands-on shadowing at the Microsoft Technology Center.</p>
-      </div>
-      <div class="value-card slide-in-right">
-        <h3>Collaborative Coding Project</h3>
-        <p>May 2023 – Jun 2023</p><br>
-        <p>Led a global coding project that enhanced my problem-solving skills while integrating diverse perspectives.</p>
-      </div>
-      <div class="value-card slide-in-left">
-        <h3>Semi-Professional Badminton Player & Head Coach</h3>
-        <p>Jan 2018 – May 2024</p><br>
-        <p>Developed leadership, teamwork, and performance analysis skills while playing and coaching competitive badminton.</p>
-      </div>
-    </div>
-    <div class="cta-container">
-      <a href="#contact" class="cta-button">Let's Talk Business</a>
-    </div>
-  </section>
+  <dialog id="modal-hsg" class="modal">
+    <button class="modal-close" aria-label="Close">&times;</button>
+    <h2>University of St. Gallen</h2>
+    <p class="eyebrow">2018 — present</p>
+    <p>Studying Economic Sciences with a focus on consulting and strategic management.
+      Coursework spans macroeconomics, corporate finance, and organizational strategy.</p>
+  </dialog>
 
-  <!-- ===================== Timeline Section ===================== -->
-  <section id="timeline" class="section">
-    <h2>My Journey</h2>
-    <div class="timeline">
-      <div class="timeline-event">
-        <div class="timeline-content">
-          <h3>2018</h3>
-          <p>Started my studies in Economic Sciences at the University of St. Gallen.</p>
-        </div>
-      </div>
-      <div class="timeline-event">
-        <div class="timeline-content">
-          <h3>2019</h3>
-          <p>Internship at Microsoft Technology Center, learning consulting and strategy.</p>
-        </div>
-      </div>
-      <div class="timeline-event">
-        <div class="timeline-content">
-          <h3>2023</h3>
-          <p>Led a global collaborative coding project, integrating diverse perspectives.</p>
-        </div>
-      </div>
-      <div class="timeline-event">
-        <div class="timeline-content">
-          <h3>2024</h3>
-          <p>Competed and coached in semi-professional badminton while pursuing my studies.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+  <dialog id="modal-microsoft" class="modal">
+    <button class="modal-close" aria-label="Close">&times;</button>
+    <h2>Microsoft Internship</h2>
+    <p class="eyebrow">Jun 2019 — Jul 2019</p>
+    <p>Shadowed consultants at the Microsoft Technology Center. Gained firsthand
+      insight into how enterprise strategy translates into technology decisions
+      for large clients.</p>
+  </dialog>
 
-  <!-- ===================== Contact Section ===================== -->
-  <section id="contact" class="section">
+  <dialog id="modal-coding" class="modal">
+    <button class="modal-close" aria-label="Close">&times;</button>
+    <h2>Collaborative Coding Project</h2>
+    <p class="eyebrow">May 2023 — Jun 2023</p>
+    <p>Led a globally distributed coding project, coordinating across time zones
+      and skill levels to ship a working product. Sharpened problem-solving and
+      cross-cultural collaboration skills.</p>
+  </dialog>
+
+  <dialog id="modal-badminton" class="modal">
+    <button class="modal-close" aria-label="Close">&times;</button>
+    <h2>Badminton — Player &amp; Head Coach</h2>
+    <p class="eyebrow">Jan 2018 — May 2024</p>
+    <p>Competed at a semi-professional level while serving as head coach.
+      Developed leadership, performance analysis, and mentorship skills
+      alongside the athletic discipline.</p>
+  </dialog>
+
+  <dialog id="modal-contact" class="modal">
+    <button class="modal-close" aria-label="Close">&times;</button>
     <h2>Get in Touch</h2>
-    <div class="contact-container">
-      <div class="contact-card">
-        <i class="fas fa-envelope"></i>
-        <h3>Email</h3>
-        <p>Philip@Duelundjensen.com</p>
-      </div>
-      <div class="contact-card">
-        <i class="fab fa-linkedin"></i>
-        <h3>LinkedIn</h3>
-        <p><a href="https://www.linkedin.com/in/philip-jensen-407310192/" target="_blank">linkedin.com/Philip-Jensen</a></p>
-      </div>
-      <div class="contact-card">
-        <i class="fab fa-twitter"></i>
-        <h3>Twitter</h3>
-        <p><a href="https://twitter.com/your-profile" target="_blank">@Philip_Jensen</a></p>
-      </div>
-      <div class="contact-card">
-        <i class="fab fa-github"></i>
-        <h3>GitHub</h3>
-        <p><a href="https://github.com/jav1i" target="_blank">github.com/Jav1i</a></p>
-      </div>
-    </div>
-    <div class="cv-download">
-      <a href="Philip_Jensen_Resume.pdf" class="download-cv" download>
-        <i class="fas fa-file-download"></i> Download My CV
-      </a>
-    </div>
-  </section>
+    <p class="eyebrow">The Town Hall</p>
+    <ul class="contact-list">
+      <li><span>Email</span><a href="mailto:Philip@Duelundjensen.com">Philip@Duelundjensen.com</a></li>
+      <li><span>LinkedIn</span><a href="https://www.linkedin.com/in/philip-jensen-407310192/" target="_blank" rel="noopener">linkedin.com/Philip-Jensen</a></li>
+      <li><span>GitHub</span><a href="https://github.com/jav1i" target="_blank" rel="noopener">github.com/Jav1i</a></li>
+      <li><span>CV</span><a href="Philip_Jensen_Resume.pdf" download>Download PDF</a></li>
+    </ul>
+  </dialog>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

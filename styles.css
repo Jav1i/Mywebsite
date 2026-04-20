@@ -1,602 +1,281 @@
 /* ===========================
-   Global Reset and Base Styles
+   Reset + Base
 =========================== */
-* {
+*, *::before, *::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-html {
-  scroll-behavior: smooth;
+
+:root {
+  --bg: #f7f7f5;
+  --surface: #ffffff;
+  --ink: #1a1a1a;
+  --ink-soft: #555;
+  --ink-faint: #888;
+  --line: #e5e5e2;
+  --accent: #1a1a1a;
+  --radius: 14px;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.04), 0 2px 8px rgba(0,0,0,0.03);
+  --shadow-lg: 0 10px 40px rgba(0,0,0,0.08);
 }
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
 body {
-  font-family: 'Poppins', sans-serif;
-  line-height: 1.6;
-  transition: background-color 0.3s, color 0.3s;
-}
-/* Light mode (default) */
-body.light-mode {
-  background: #f0f0f0;
-  color: #333;
-}
-/* Dark mode */
-body.dark-mode {
-  background: #1a1a1a;
-  color: #ddd;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-weight: 400;
+  color: var(--ink);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* ===========================
-   Navbar Styles
+   Topbar
 =========================== */
-.navbar {
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
-  background: rgba(255, 255, 255, 0.95);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  position: fixed;
-  width: 100%;
-  top: 0;
-  z-index: 1100;
-  transition: background 0.3s;
+  padding: 1.5rem 2.5rem;
+  pointer-events: none;
 }
-body.dark-mode .navbar {
-  background: rgba(26, 26, 26, 0.95);
-}
-.navbar .brand-title {
+
+.brand {
   font-family: 'Playfair Display', serif;
-  font-size: 2rem;
-  color: #008080; /* teal accent */
-}
-.navbar .navbar-links {
-  display: flex;
-  gap: 1.5rem;
-}
-.navbar .navbar-links ul {
-  list-style: none;
-  display: flex;
-}
-.navbar .navbar-links a {
-  text-decoration: none;
-  color: #555;
+  font-size: 1.35rem;
   font-weight: 500;
-  padding: 0.5rem 1rem;
-  border-radius: 25px;
-  transition: background 0.3s, color 0.3s;
-}
-body.dark-mode .navbar .navbar-links a {
-  color: #bbb;
-}
-.navbar .navbar-links a:hover {
-  background: #008080;
-  color: #fff;
-}
-/* Toggle button for mobile navigation */
-.toggle-button {
-  display: none;
-  flex-direction: column;
-  cursor: pointer;
-}
-.toggle-button .bar {
-  width: 25px;
-  height: 3px;
-  background-color: #555;
-  margin: 4px;
-  transition: 0.3s;
-}
-body.dark-mode .toggle-button .bar {
-  background-color: #bbb;
-}
-/* Light/Dark Mode Toggle Button */
-.theme-toggle {
-  border: none;
-  background: none;
-  cursor: pointer;
-  font-size: 1.25rem;
-  color: #008080;
-  transition: color 0.3s;
-  margin-right: 1rem;
-}
-body.dark-mode .theme-toggle {
-  color: #ddd;
-}
-.theme-toggle:hover {
-  color: #005e5e;
+  letter-spacing: 0.01em;
+  pointer-events: auto;
 }
 
-/* ===========================
-   Section Base Styles & Animations
-=========================== */
-.section {
-  padding: 120px 20px 60px;
-  text-align: center;
-  min-height: 100vh;
-  position: relative;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-.section.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-/* Alternate background for contrast */
-.section:nth-child(even) {
-  background: #fafafa;
-}
-body.dark-mode .section:nth-child(even) {
-  background: #2a2a2a;
-}
-
-/* ===========================
-   Hero Section with Background Zoom & Elegant Fade-In
-=========================== */
-#home {
-  position: relative;
+.topnav {
   display: flex;
-  flex-direction: column;
+  gap: 0.5rem;
+  pointer-events: auto;
+}
+
+.nav-link {
+  background: none;
+  border: none;
+  font: inherit;
+  color: var(--ink-soft);
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.nav-link:hover {
+  background: var(--surface);
+  color: var(--ink);
+}
+
+/* ===========================
+   Main / Scene
+=========================== */
+main {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+}
+
+#scene {
+  position: absolute;
+  inset: 0;
+}
+
+#scene canvas {
+  display: block;
+  outline: none;
+}
+
+.hint {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: var(--ink-faint);
+  text-transform: uppercase;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.loading {
+  position: fixed;
+  inset: 0;
+  display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  background: var(--bg);
+  z-index: 20;
+  font-size: 0.9rem;
+  color: var(--ink-faint);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: opacity 0.4s ease;
+}
+
+.loading.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ===========================
+   Tooltip (follows cursor on hover)
+=========================== */
+.tooltip {
+  position: fixed;
+  pointer-events: none;
+  background: var(--ink);
   color: #fff;
-  animation: fadeIn 1s ease-out forwards;
+  padding: 0.4rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  transform: translate(-50%, -160%);
+  white-space: nowrap;
+  z-index: 5;
+  transition: opacity 0.15s ease;
 }
-/* Background image with overlay — scales via JS on scroll */
-#home::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: url('https://images.unsplash.com/photo-1515169067865-5387ec356754?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80') no-repeat center center/cover;
-  z-index: -2;
-  filter: brightness(0.6);
-  transform: scale(var(--hero-scale, 1));
-  transition: transform 0.2s ease-out;
+
+/* ===========================
+   Modals (native <dialog>)
+=========================== */
+.modal {
+  border: none;
+  border-radius: var(--radius);
+  padding: 2.5rem;
+  max-width: 480px;
+  width: 90%;
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: var(--shadow-lg);
+  animation: modalIn 0.25s ease-out;
 }
-/* Elegant fade-in keyframes */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-20px); }
+
+.modal::backdrop {
+  background: rgba(20, 20, 20, 0.25);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+@keyframes modalIn {
+  from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: translateY(0); }
 }
-/* Extra ripple effect element */
-.ripple {
+
+.modal h2 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
+  font-size: 1.9rem;
+  margin-bottom: 0.3rem;
+}
+
+.modal .eyebrow {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ink-faint);
+  margin-bottom: 1.2rem;
+}
+
+.modal p {
+  line-height: 1.65;
+  color: var(--ink-soft);
+}
+
+.modal-close {
   position: absolute;
-  width: 200px;
-  height: 200px;
-  border: 4px solid;
-  border-color: #008080;
-  border-radius: 50%;
-  animation: rippleEffect 3s ease-out infinite;
-  z-index: -1;
-}
-body.dark-mode .ripple {
-  border-color: #ddd;
-}
-@keyframes rippleEffect {
-  0% {
-    transform: scale(0.8);
-    opacity: 0.8;
-  }
-  100% {
-    transform: scale(1.8);
-    opacity: 0;
-  }
-}
-#home h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: 3rem;
-  margin-bottom: 0.5rem;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-}
-#home p {
-  font-size: 1.25rem;
-  color: #f0f0f0;
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
-}
-
-/* ===========================
-   CTA Button Styles
-=========================== */
-.cta-container {
-  margin: 2rem 0;
-  text-align: center;
-}
-.cta-button {
-  display: inline-block;
-  background: linear-gradient(45deg, #008080, #008080);
-  color: #fff;
-  padding: 0.75rem 1.5rem;
-  border-radius: 25px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-.cta-button:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-}
-
-/* ===========================
-   About Section Styles
-=========================== */
-#about {
-  background: #fff;
-  color: #333;
-}
-body.dark-mode #about {
-  background: #333;
-  color: #ddd;
-}
-#about h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-  color: #008080;
-}
-.about-container {
-  display: flex;
-  gap: 1.5rem;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-top: 2rem;
-}
-.about-card {
-  background: #f9f9f9;
-  border-radius: 15px;
-  padding: 1.5rem;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  transition: transform 0.3s, box-shadow 0.3s;
-  flex: 1;
-  max-width: 300px;
-  min-width: 250px;
-  text-align: center;
-  margin: 1rem;
-  cursor: pointer;
-}
-body.dark-mode .about-card {
-  background: #444;
-  color: #eee;
-}
-.about-card h3 {
-  font-family: 'Playfair Display', serif;
+  top: 1rem;
+  right: 1rem;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: none;
   font-size: 1.5rem;
-  margin-bottom: 1rem;
-  color: #008080;
-}
-.about-card p {
-  font-size: 1rem;
-  color: #666;
-}
-body.dark-mode .about-card p {
-  color: #ccc;
-}
-.about-card:hover {
-  transform: translateY(-6px) scale(1.02);
-  box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+  line-height: 1;
+  color: var(--ink-faint);
+  cursor: pointer;
+  border-radius: 50%;
+  transition: background 0.2s, color 0.2s;
 }
 
-/* Modal Styles */
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 1200;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.6);
-  justify-content: center;
+.modal-close:hover {
+  background: var(--bg);
+  color: var(--ink);
+}
+
+.contact-list {
+  list-style: none;
+  margin-top: 0.5rem;
+}
+
+.contact-list li {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-}
-.modal-content {
-  background: #fff;
-  padding: 2rem;
-  border-radius: 15px;
-  max-width: 500px;
-  width: 90%;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-  text-align: center;
-  position: relative;
-  color: #333;
-}
-body.dark-mode .modal-content {
-  background: #222;
-  color: #ddd;
-}
-.close {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  font-size: 1.5rem;
-  color: #888;
-  cursor: pointer;
-  transition: color 0.3s;
-}
-.close:hover {
-  color: #333;
-}
-body.dark-mode .close:hover {
-  color: #fff;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid var(--line);
 }
 
-/* ===========================
-   Experience Section Styles
-=========================== */
-#services {
-  background: #fafafa;
-  color: #333;
-}
-body.dark-mode #services {
-  background: #2a2a2a;
-  color: #ddd;
-}
-#services h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-  color: #008080;
-}
-.values-container {
-  display: flex;
-  gap: 2rem;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-top: 2rem;
-}
-.value-card {
-  background: #fff;
-  border-radius: 15px;
-  padding: 1.5rem;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  transition: transform 0.5s, opacity 0.5s;
-  flex: 1;
-  max-width: 300px;
-  min-width: 250px;
-  opacity: 0;
-  transform: translateX(50px);
-}
-body.dark-mode .value-card {
-  background: #555;
-  color: #eee;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-}
-.slide-in-left {
-  transform: translateX(-50px);
-}
-.show.slide-in-left, .show.slide-in-right {
-  transform: translateX(0);
-  opacity: 1;
-}
-.value-card:hover {
-  transform: translateY(-6px) scale(1.02);
-  box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+.contact-list li:last-child {
+  border-bottom: none;
 }
 
-/* ===========================
-   Timeline Section Styles
-=========================== */
-body.light-mode #timeline {
-  background: #fff;
-  color: #333;
-}
-body.light-mode #timeline h2 {
-  color: #008080;
-}
-body.light-mode .timeline::after {
-  background-color: #008080;
-}
-body.light-mode .timeline-event {
-  background: #fafafa;
-  color: #333;
-}
-body.light-mode .timeline-event::after {
-  background-color: #008080;
-  border: 4px solid #fff;
-}
-body.light-mode .timeline-content h3 {
-  color: #008080;
+.contact-list span {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-faint);
 }
 
-body.dark-mode #timeline {
-  background: #2a2a2a;
-  color: #ddd;
-}
-body.dark-mode #timeline h2 {
-  color: #ddd;
-}
-body.dark-mode .timeline::after {
-  background-color: #ddd;
-}
-body.dark-mode .timeline-event {
-  background: #444;
-  color: #ddd;
-}
-body.dark-mode .timeline-event::after {
-  background-color: #ddd;
-  border: 4px solid #2a2a2a;
-}
-body.dark-mode .timeline-content h3 {
-  color: #ddd;
-}
-#timeline h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-}
-.timeline {
-  position: relative;
-  max-width: 800px;
-  margin: 40px auto;
-  padding: 40px 0;
-}
-.timeline::after {
-  content: '';
-  position: absolute;
-  width: 4px;
-  top: 0;
-  bottom: 0;
-  left: 50%;
-  margin-left: -2px;
-}
-.timeline-event {
-  padding: 20px 30px;
-  position: relative;
-  border-radius: 6px;
-  width: 45%;
-  margin: 10px 0;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s, transform 0.6s;
-}
-.timeline-event.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-.timeline-event::after {
-  content: '';
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  top: 20px;
-  border-radius: 50%;
-  z-index: 1;
-}
-.timeline-event:nth-child(odd) {
-  left: 0;
-}
-.timeline-event:nth-child(odd)::after {
-  right: -10px;
-}
-.timeline-event:nth-child(even) {
-  left: 55%;
-}
-.timeline-event:nth-child(even)::after {
-  left: -10px;
-}
-.timeline-content {
-  padding: 10px 20px;
-}
-.timeline-content h3 {
-  margin-bottom: 0.5rem;
-  font-family: 'Playfair Display', serif;
-}
-
-/* ===========================
-   Contact Section Styles
-=========================== */
-#contact {
-  background: #fafafa;
-  color: #333;
-}
-body.dark-mode #contact {
-  background: #2a2a2a;
-  color: #ddd;
-}
-#contact h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-  color: #008080;
-}
-.contact-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 2rem;
-  margin-top: 2rem;
-  text-align: center;
-}
-.contact-card {
-  background: #fff;
-  border-radius: 15px;
-  padding: 1.5rem;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-body.dark-mode .contact-card {
-  background: #444;
-}
-.contact-card i {
-  font-size: 2.5rem;
-  color: #008080;
-}
-.contact-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
-}
-.contact-card a {
+.contact-list a {
+  color: var(--ink);
   text-decoration: none;
-  color: #555;
-  transition: color 0.3s;
+  font-weight: 500;
+  transition: color 0.2s;
 }
-body.dark-mode .contact-card a {
-  color: #bbb;
-}
-.contact-card a:hover {
-  color: #008080;
-}
-.cv-download {
-  text-align: center;
-  margin-top: 2rem;
-}
-.download-cv {
-  background: #008080;
-  color: #fff;
-  padding: 0.75rem 1.5rem;
-  border-radius: 10px;
-  text-decoration: none;
-  transition: background 0.3s, transform 0.3s;
-}
-.download-cv:hover {
-  background: #006666;
-  transform: translateY(-3px);
+
+.contact-list a:hover {
+  color: var(--ink-soft);
 }
 
 /* ===========================
-   Responsive — Mobile Navigation
+   Responsive
 =========================== */
-@media (max-width: 768px) {
-  .toggle-button {
-    display: flex;
+@media (max-width: 640px) {
+  .topbar {
+    padding: 1rem 1.25rem;
   }
-  .navbar {
-    flex-wrap: wrap;
+  .brand {
+    font-size: 1.15rem;
   }
-  .navbar .navbar-links {
-    display: none;
-    width: 100%;
-    margin-top: 1rem;
+  .nav-link {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.9rem;
   }
-  .navbar .navbar-links ul {
-    flex-direction: column;
-    width: 100%;
-    gap: 0.5rem;
+  .modal {
+    padding: 1.75rem;
   }
-  .navbar .navbar-links.active {
-    display: flex;
+  .modal h2 {
+    font-size: 1.5rem;
   }
-  .navbar .navbar-links a {
-    display: block;
-    text-align: center;
-  }
-  #home h2 {
-    font-size: 2.25rem;
-  }
-  .timeline::after {
-    left: 20px;
-  }
-  .timeline-event,
-  .timeline-event:nth-child(even) {
-    width: 100%;
-    left: 0;
-    padding-left: 50px;
-  }
-  .timeline-event::after,
-  .timeline-event:nth-child(odd)::after,
-  .timeline-event:nth-child(even)::after {
-    left: 10px;
-    right: auto;
+  .hint {
+    font-size: 0.7rem;
+    bottom: 1.25rem;
   }
 }
