@@ -124,8 +124,8 @@ function addDashedLine(length, x, z, axis /* 'x' or 'z' */) {
 
 function addCrosswalk(cx, cz, axis /* perpendicular to road */, span) {
   // stripes run perpendicular to road axis; "axis" arg is the road direction
-  const stripeCount = 5;
-  const stripeW = 0.28, gap = 0.2;
+  const stripeCount = 3;
+  const stripeW = 0.34, gap = 0.24;
   const step = stripeW + gap;
   const totalLen = stripeCount * stripeW + (stripeCount - 1) * gap;
   const startOff = -totalLen / 2 + stripeW / 2;
@@ -161,18 +161,22 @@ const nsEastX =  4.3;    // between center column and east column (Microsoft/Con
 addRoad(1.8, 22, nsWestX, 0, false);
 addRoad(1.8, 22, nsEastX, 0, false);
 
-// Dashed center lines — skip the intersections with N-S roads
-// N-S road footprint in x: nsWestX ± 0.9 = [-6.65, -4.85], nsEastX ± 0.9 = [3.4, 5.2]
-// E-W road runs x = [-16, 16], split into 3 segments:
-addDashedLine(9,    -11.3, 0, 'x');  // x = [-16, -6.65]
-addDashedLine(7.8,  -0.72, 0, 'x');  // x = [-4.85, 3.4]
-addDashedLine(10.5,  10.6, 0, 'x');  // x = [5.2, 16]
+// Dashed center lines — each segment is clear of BOTH the N-S road crossings
+// AND the crosswalks (three stripes wide). Crosswalk half-length = 0.75.
+// E-W skip zones (each intersection + its two crosswalks):
+//   west intersection: x ∈ [-8.7, -2.8]    (crosswalks at -7.95 and -3.55)
+//   east intersection: x ∈ [ 1.35, 7.25]   (crosswalks at 2.1 and 6.5)
+addDashedLine(7.2,  -12.35, 0, 'x');  // x = [-16, -8.7]
+addDashedLine(4.0,   -0.72, 0, 'x');  // x = [-2.8, 1.35]
+addDashedLine(8.6,   11.62, 0, 'x');  // x = [7.25, 16]
 
-// N-S center lines — skip the E-W main intersection at z ∈ [-1, 1]
-addDashedLine(9, nsWestX, -5.5, 'z');
-addDashedLine(9, nsWestX,  5.5, 'z');
-addDashedLine(9, nsEastX, -5.5, 'z');
-addDashedLine(9, nsEastX,  5.5, 'z');
+// N-S center lines — skip the E-W main intersection AND its N-S crosswalks
+// Crosswalk z-spans: [-3.45, -1.95] and [1.95, 3.45], E-W road [-1, 1].
+// Combined skip per N-S road: z ∈ [-3.45, 3.45].
+addDashedLine(6.4, nsWestX, -6.72, 'z');
+addDashedLine(6.4, nsWestX,  6.72, 'z');
+addDashedLine(6.4, nsEastX, -6.72, 'z');
+addDashedLine(6.4, nsEastX,  6.72, 'z');
 
 // Crosswalks (well clear of the N-S road edges so they stay on the E-W main)
 addCrosswalk(nsWestX - 2.2, 0, 'x', 2);
@@ -698,10 +702,11 @@ function makeBadminton({ roofColor, wallColor }) {
     racket.add(s);
   }
 
-  // perch racket on the roof peak, tilted back so the head face is visible from above
-  racket.position.set(-0.1, h + roofH - 0.15, 0.1);
-  racket.rotation.x = -Math.PI / 3.5;  // lean head toward camera
-  racket.rotation.z = Math.PI / 10;    // slight side tilt for dynamism
+  // Lay the racket flat on the east-side lawn of the house (handle near the house,
+  // head pointing south). Raised slightly so the grip cylinder doesn't sink into ground.
+  racket.position.set(2.3, 0.08, -0.6);
+  racket.rotation.x = Math.PI / 2;       // lay flat, head up
+  racket.rotation.z = -Math.PI / 10;     // slight diagonal for a 'left here' feel
   g.add(racket);
 
   castAll(g);
@@ -770,7 +775,79 @@ treeSpots.forEach(([x, z]) => {
 });
 
 // ===========================
-// Car (parked on the E-W road)
+// Traffic light
+// ===========================
+function createTrafficLight() {
+  const g = new THREE.Group();
+
+  const metalMat = new THREE.MeshStandardMaterial({ color: 0x2c3036, roughness: 0.45, metalness: 0.5 });
+
+  // base plate
+  const base = new THREE.Mesh(new THREE.BoxGeometry(0.3, 0.1, 0.3), metalMat);
+  base.position.y = 0.05;
+  g.add(base);
+
+  // pole
+  const poleH = 2.2;
+  const pole = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.07, poleH, 12), metalMat);
+  pole.position.y = 0.1 + poleH / 2;
+  g.add(pole);
+
+  // housing (the black box containing the lights)
+  const housingH = 0.85;
+  const housingY = 0.1 + poleH - 0.05;
+  const housing = new THREE.Mesh(new THREE.BoxGeometry(0.3, housingH, 0.24), metalMat);
+  housing.position.y = housingY + housingH / 2;
+  g.add(housing);
+
+  // Three lenses on BOTH faces of the housing so the light reads from any angle.
+  // Red (top), yellow (middle), green (bottom) — standard order.
+  const lensZ = 0.16;         // protrudes clearly past the 0.12 housing face
+  const lensR = 0.105;
+  const lenses = [
+    { color: 0xff3636, emissive: 0x8a1818, offset:  0.26 }, // red, top
+    { color: 0xffcc44, emissive: 0x4d3d0a, offset:  0   }, // yellow, middle
+    { color: 0x4cdb5c, emissive: 0x0e4a18, offset: -0.26 }, // green, bottom
+  ];
+
+  const faces = [+1, -1];  // +Z and -Z faces
+  faces.forEach(side => {
+    lenses.forEach(l => {
+      const lens = new THREE.Mesh(
+        new THREE.CylinderGeometry(lensR, lensR, 0.05, 18),
+        new THREE.MeshStandardMaterial({
+          color: l.color, emissive: l.emissive, roughness: 0.35, metalness: 0.1,
+        })
+      );
+      lens.rotation.x = Math.PI / 2;
+      lens.position.set(0, housing.position.y + l.offset, side * lensZ);
+      g.add(lens);
+
+      // small visor above each lens
+      const visor = new THREE.Mesh(new THREE.BoxGeometry(0.22, 0.03, 0.08), metalMat);
+      visor.position.set(
+        0,
+        housing.position.y + l.offset + lensR + 0.005,
+        side * (lensZ + 0.02)
+      );
+      g.add(visor);
+    });
+  });
+
+  castAll(g);
+  return g;
+}
+
+// Place a traffic light on the NE corner of the west intersection.
+// Lenses face east (+X) — visible from the default camera angle and to
+// west-bound traffic approaching the intersection on the north lane.
+const tl = createTrafficLight();
+tl.position.set(-4.7, 0, -1.3);
+tl.rotation.y = Math.PI / 2;
+scene.add(tl);
+
+// ===========================
+// Car (on the E-W road)
 // ===========================
 function createCar(bodyColor = 0xd93838) {
   const g = new THREE.Group();
