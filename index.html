@@ -1,87 +1,208 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Philip Jensen</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+  <meta name="description" content="Philip Jensen — Economic Sciences student at the University of St. Gallen, focused on consulting and strategic management.">
+  <link rel="canonical" href="https://duelundjensen.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Philip Jensen">
+  <meta property="og:description" content="Economic Sciences student at the University of St. Gallen, focused on consulting and strategic management.">
+  <meta property="og:url" content="https://duelundjensen.com/">
+  <meta name="theme-color" content="#f7f7f5" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#141413" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23d27654'/%3E%3Cpath d='M20 14h14.5c9 0 14.5 5 14.5 12.5S43.5 39 34.5 39H28v11h-8V14zm8 7.5v10h6c3.6 0 6.2-1.8 6.2-5s-2.6-5-6.2-5H28z' fill='%23fff'/%3E%3C/svg%3E">
+
+  <!-- Applied before first paint so a saved theme never flashes. -->
+  <script>
+    (function () {
+      var root = document.documentElement;
+      root.classList.add('js');
+      try {
+        var t = localStorage.getItem('theme');
+        if (t === 'dark' || t === 'light') root.setAttribute('data-theme', t);
+      } catch (e) {}
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
 </head>
 <body>
-  <header class="topbar">
-    <div class="brand">Philip Jensen</div>
-    <nav class="topnav">
-      <button class="nav-link" data-open="modal-about">About</button>
-      <button class="nav-link" data-open="modal-contact">Contact</button>
-    </nav>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header" id="top">
+    <div class="container header-inner">
+      <a class="brand" href="#top">Philip Jensen</a>
+
+      <nav class="site-nav" aria-label="Primary">
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu">
+          <span class="nav-toggle-bars" aria-hidden="true"><span></span><span></span><span></span></span>
+          <span class="visually-hidden">Menu</span>
+        </button>
+        <ul class="nav-menu" id="nav-menu">
+          <li><a href="#about">About</a></li>
+          <li><a href="#education">Education</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <button class="theme-toggle" type="button" aria-label="Switch to dark theme" title="Toggle theme">
+        <svg class="icon icon-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <circle cx="12" cy="12" r="4.2"/>
+          <path d="M12 2.5v2.6M12 18.9v2.6M2.5 12h2.6M18.9 12h2.6M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/>
+        </svg>
+        <svg class="icon icon-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M20.5 14.6A8.5 8.5 0 0 1 9.4 3.5a8.5 8.5 0 1 0 11.1 11.1z"/>
+        </svg>
+      </button>
+    </div>
   </header>
 
-  <main>
-    <div id="scene"></div>
-    <div class="hint">Click a building to explore · drag to look around</div>
-    <div id="tooltip" class="tooltip" hidden></div>
-    <div class="loading" id="loading">Loading…</div>
+  <main id="main">
+    <!-- ===================== Hero ===================== -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container hero-copy">
+        <h1 id="hero-title">Philip Jensen</h1>
+        <p class="lead">Economic Sciences student at the University of St.&nbsp;Gallen, focused on consulting and strategic management.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#contact">Get in touch</a>
+          <a class="btn btn-ghost" href="Philip_Jensen_Resume.pdf" download>Download CV</a>
+        </div>
+      </div>
+
+      <div class="city-wrap">
+        <svg class="city" viewBox="-566 -288 1132 588" xmlns="http://www.w3.org/2000/svg" role="group" aria-labelledby="city-title" focusable="false"><title id="city-title">Map of Philip's town: each building links to a section of this page</title><defs><clipPath id="city-clip"><polygon points="-36.0,-279.0 558.0,18.0 36.0,279.0 -558.0,-18.0"/></clipPath></defs><g class="city-ground"><polygon points="-558.0,-18.0 36.0,279.0 36.0,291.6 -558.0,-5.4" fill="var(--c-slab-l)"/><polygon points="558.0,18.0 36.0,279.0 36.0,291.6 558.0,30.6" fill="var(--c-slab-r)"/><polygon points="-36.0,-279.0 558.0,18.0 36.0,279.0 -558.0,-18.0" fill="var(--c-ground)"/><polygon points="-99.0,-198.9 37.8,-130.5 -73.8,-74.7 -210.6,-143.1" fill="var(--c-plot)"/><polygon points="88.2,-112.5 225.0,-44.1 113.4,11.7 -23.4,-56.7" fill="var(--c-plot)"/><polygon points="261.0,-18.9 397.8,49.5 286.2,105.3 149.4,36.9" fill="var(--c-plot)"/><polygon points="-286.2,-105.3 -149.4,-36.9 -261.0,18.9 -397.8,-49.5" fill="var(--c-plot)"/><polygon points="-113.4,-11.7 23.4,56.7 -88.2,112.5 -225.0,44.1" fill="var(--c-plot)"/><polygon points="73.8,74.7 210.6,143.1 99.0,198.9 -37.8,130.5" fill="var(--c-plot)"/><polygon points="-270.0,-160.2 320.4,135.0 270.0,160.2 -320.4,-135.0" fill="var(--c-curb)"/><polygon points="-270.0,-153.0 306.0,135.0 270.0,153.0 -306.0,-135.0" fill="var(--c-road)"/><polygon points="-79.2,-230.4 460.8,39.6 439.2,50.4 -100.8,-219.6" fill="var(--c-road)"/><polygon points="-439.2,-50.4 100.8,219.6 79.2,230.4 -460.8,-39.6" fill="var(--c-road)"/><polygon points="78.3,-158.8 110.7,-142.7 -285.3,55.4 -317.7,39.1" fill="var(--c-road)"/><polygon points="259.2,-68.4 291.6,-52.2 -104.4,145.8 -136.8,129.6" fill="var(--c-road)"/><polygon points="-260.8,-131.5 -242.8,-122.5 -245.0,-121.4 -263.0,-130.4" fill="var(--c-line)"/><polygon points="-230.2,-116.2 -212.2,-107.2 -214.4,-106.1 -232.4,-115.1" fill="var(--c-line)"/><polygon points="-199.6,-100.9 -181.6,-91.9 -183.8,-90.8 -201.8,-99.8" fill="var(--c-line)"/><polygon points="-20.9,-11.5 -2.9,-2.5 -5.0,-1.4 -23.0,-10.4" fill="var(--c-line)"/><polygon points="155.3,76.6 173.3,85.6 171.2,86.7 153.2,77.7" fill="var(--c-line)"/><polygon points="185.9,91.9 203.9,100.9 201.8,102.0 183.8,93.0" fill="var(--c-line)"/><polygon points="216.5,107.2 234.5,116.2 232.4,117.3 214.4,108.3" fill="var(--c-line)"/><polygon points="247.1,122.5 265.1,131.5 263.0,132.6 245.0,123.6" fill="var(--c-line)"/><polygon points="56.0,-132.6 58.1,-131.5 40.1,-122.5 38.0,-123.6" fill="var(--c-line)"/><polygon points="25.4,-117.3 27.5,-116.2 9.5,-107.2 7.4,-108.3" fill="var(--c-line)"/><polygon points="-5.2,-102.0 -3.1,-100.9 -21.1,-91.9 -23.2,-93.0" fill="var(--c-line)"/><polygon points="-185.9,-11.6 -183.8,-10.5 -201.8,-1.5 -203.9,-2.6" fill="var(--c-line)"/><polygon points="-216.5,3.7 -214.4,4.8 -232.4,13.8 -234.5,12.7" fill="var(--c-line)"/><polygon points="-247.1,19.0 -245.0,20.1 -263.0,29.1 -265.1,28.0" fill="var(--c-line)"/><polygon points="-138.6,-87.3 -132.5,-84.2 -168.5,-66.2 -174.6,-69.3" fill="var(--c-line)"/><polygon points="-128.2,-82.1 -122.0,-79.0 -158.0,-61.0 -164.2,-64.1" fill="var(--c-line)"/><polygon points="-117.7,-76.9 -111.6,-73.8 -147.6,-55.8 -153.7,-58.9" fill="var(--c-line)"/><polygon points="-59.4,-47.7 -53.3,-44.6 -89.3,-26.6 -95.4,-29.7" fill="var(--c-line)"/><polygon points="-49.0,-42.5 -42.8,-39.4 -78.8,-21.4 -85.0,-24.5" fill="var(--c-line)"/><polygon points="-38.5,-37.3 -32.4,-34.2 -68.4,-16.2 -74.5,-19.3" fill="var(--c-line)"/><polygon points="-57.6,-90.9 -25.2,-74.7 -31.3,-71.6 -63.7,-87.8" fill="var(--c-line)"/><polygon points="-68.0,-85.7 -35.6,-69.5 -41.8,-66.4 -74.2,-82.6" fill="var(--c-line)"/><polygon points="-78.5,-80.5 -46.1,-64.3 -52.2,-61.2 -84.6,-77.4" fill="var(--c-line)"/><polygon points="-154.8,-42.3 -122.4,-26.1 -128.5,-23.0 -160.9,-39.2" fill="var(--c-line)"/><polygon points="-165.2,-37.1 -132.8,-20.9 -139.0,-17.8 -171.4,-34.0" fill="var(--c-line)"/><polygon points="-175.7,-31.9 -143.3,-15.7 -149.4,-12.6 -181.8,-28.8" fill="var(--c-line)"/><polygon points="236.9,-42.1 239.0,-41.0 221.0,-32.0 218.9,-33.1" fill="var(--c-line)"/><polygon points="206.3,-26.8 208.4,-25.7 190.4,-16.7 188.3,-17.8" fill="var(--c-line)"/><polygon points="175.7,-11.5 177.8,-10.4 159.8,-1.4 157.7,-2.5" fill="var(--c-line)"/><polygon points="-5.0,78.8 -2.9,79.9 -20.9,88.9 -23.0,87.8" fill="var(--c-line)"/><polygon points="-35.6,94.1 -33.5,95.2 -51.5,104.2 -53.6,103.1" fill="var(--c-line)"/><polygon points="-66.2,109.4 -64.1,110.5 -82.1,119.5 -84.2,118.4" fill="var(--c-line)"/><polygon points="42.3,3.1 48.4,6.2 12.4,24.2 6.3,21.1" fill="var(--c-line)"/><polygon points="52.7,8.4 58.9,11.4 22.9,29.4 16.7,26.4" fill="var(--c-line)"/><polygon points="63.2,13.6 69.3,16.6 33.3,34.6 27.2,31.6" fill="var(--c-line)"/><polygon points="121.5,42.8 127.6,45.8 91.6,63.8 85.5,60.8" fill="var(--c-line)"/><polygon points="131.9,48.0 138.1,51.0 102.1,69.0 95.9,66.0" fill="var(--c-line)"/><polygon points="142.4,53.2 148.5,56.2 112.5,74.2 106.4,71.2" fill="var(--c-line)"/><polygon points="123.3,-0.5 155.7,15.8 149.6,18.8 117.2,2.6" fill="var(--c-line)"/><polygon points="112.9,4.8 145.3,21.0 139.1,24.0 106.7,7.8" fill="var(--c-line)"/><polygon points="102.4,10.0 134.8,26.2 128.7,29.2 96.3,13.0" fill="var(--c-line)"/><polygon points="26.1,48.1 58.5,64.4 52.4,67.4 20.0,51.2" fill="var(--c-line)"/><polygon points="15.7,53.4 48.1,69.6 41.9,72.6 9.5,56.4" fill="var(--c-line)"/><polygon points="5.2,58.6 37.6,74.8 31.5,77.9 -0.9,61.6" fill="var(--c-line)"/></g><g class="city-north"><polygon points="-36.0,-250.6 -31.7,-248.4 -36.0,-246.2 -40.3,-248.4" fill="var(--c-trunk)"/><polygon points="-40.3,-234.0 -36.0,-231.8 -36.0,-246.2 -40.3,-248.4" fill="var(--c-trunk)"/><polygon points="-31.7,-234.0 -36.0,-231.8 -36.0,-246.2 -31.7,-248.4" fill="var(--c-trunk)"/><circle cx="-36.0" cy="-258.3" r="13.0" fill="var(--c-leaf)"/><circle cx="-39.6" cy="-261.9" r="6.5" fill="var(--c-leaf-hi)"/><a href="#about" class="city-link" data-building="about" aria-label="About Me — jump to section"><title>About Me</title><g class="bld"><polygon points="-86.4,-205.2 -32.4,-178.2 -86.4,-151.2 -140.4,-178.2" fill="#f5e4c8"/><polygon points="-140.4,-136.8 -86.4,-109.8 -86.4,-151.2 -140.4,-178.2" fill="#d3c4ac"/><polygon points="-32.4,-136.8 -86.4,-109.8 -86.4,-151.2 -32.4,-178.2" fill="#b0a490"/><polygon points="-132.3,-153.4 -123.3,-148.9 -123.3,-157.9 -132.3,-162.4" fill="#b8cfdc"/><polygon points="-103.5,-139.0 -94.5,-134.5 -94.5,-143.5 -103.5,-148.0" fill="#b8cfdc"/><polygon points="-118.4,-125.8 -108.4,-120.8 -108.4,-141.5 -118.4,-146.5" fill="#8b7355"/><polygon points="-54.0,-146.7 -64.8,-141.3 -64.8,-150.3 -54.0,-155.7" fill="#9cb0bb"/><polygon points="-153.0,-178.2 -86.4,-144.9 -86.4,-203.4" fill="#bd6a4c"/><polygon points="-19.8,-178.2 -86.4,-144.9 -86.4,-203.4" fill="#9b573e"/><polygon points="-69.3,-213.0 -63.5,-210.2 -69.3,-207.3 -75.1,-210.2" fill="#eae6dd"/><polygon points="-75.1,-191.0 -69.3,-188.1 -69.3,-207.3 -75.1,-210.2" fill="#c9c6be"/><polygon points="-63.5,-191.0 -69.3,-188.1 -69.3,-207.3 -63.5,-210.2" fill="#a8a69f"/><polygon points="-122.4,-130.0 -104.4,-121.0 -111.6,-117.4 -129.6,-126.4" fill="#eae6dd"/><polygon points="-129.6,-124.2 -111.6,-115.2 -111.6,-117.4 -129.6,-126.4" fill="#c9c6be"/><polygon points="-104.4,-118.8 -111.6,-115.2 -111.6,-117.4 -104.4,-121.0" fill="#a8a69f"/></g><g class="lbl" aria-hidden="true"><rect x="-129.8" y="-251.0" width="86.8" height="26" rx="13"/><text x="-86.4" y="-234.0" text-anchor="middle">About Me</text></g></a><polygon points="-126.0,-205.6 -121.7,-203.4 -126.0,-201.2 -130.3,-203.4" fill="var(--c-trunk)"/><polygon points="-130.3,-189.0 -126.0,-186.8 -126.0,-201.2 -130.3,-203.4" fill="var(--c-trunk)"/><polygon points="-121.7,-189.0 -126.0,-186.8 -126.0,-201.2 -121.7,-203.4" fill="var(--c-trunk)"/><circle cx="-126.0" cy="-213.3" r="13.0" fill="var(--c-leaf)"/><circle cx="-129.6" cy="-216.9" r="6.5" fill="var(--c-leaf-hi)"/><polygon points="90.0,-205.6 94.3,-203.4 90.0,-201.2 85.7,-203.4" fill="var(--c-trunk)"/><polygon points="85.7,-189.0 90.0,-186.8 90.0,-201.2 85.7,-203.4" fill="var(--c-trunk)"/><polygon points="94.3,-189.0 90.0,-186.8 90.0,-201.2 94.3,-203.4" fill="var(--c-trunk)"/><circle cx="90.0" cy="-213.3" r="13.0" fill="var(--c-leaf)"/><circle cx="86.4" cy="-216.9" r="6.5" fill="var(--c-leaf-hi)"/><polygon points="-198.0,-169.6 -193.7,-167.4 -198.0,-165.2 -202.3,-167.4" fill="var(--c-trunk)"/><polygon points="-202.3,-153.0 -198.0,-150.8 -198.0,-165.2 -202.3,-167.4" fill="var(--c-trunk)"/><polygon points="-193.7,-153.0 -198.0,-150.8 -198.0,-165.2 -193.7,-167.4" fill="var(--c-trunk)"/><circle cx="-198.0" cy="-177.3" r="13.0" fill="var(--c-leaf)"/><circle cx="-201.6" cy="-180.9" r="6.5" fill="var(--c-leaf-hi)"/><polygon points="162.0,-169.6 166.3,-167.4 162.0,-165.2 157.7,-167.4" fill="var(--c-trunk)"/><polygon points="157.7,-153.0 162.0,-150.8 162.0,-165.2 157.7,-167.4" fill="var(--c-trunk)"/><polygon points="166.3,-153.0 162.0,-150.8 162.0,-165.2 166.3,-167.4" fill="var(--c-trunk)"/><circle cx="162.0" cy="-177.3" r="13.0" fill="var(--c-leaf)"/><circle cx="158.4" cy="-180.9" r="6.5" fill="var(--c-leaf-hi)"/><polygon points="234.0,-133.6 238.3,-131.4 234.0,-129.2 229.7,-131.4" fill="var(--c-trunk)"/><polygon points="229.7,-117.0 234.0,-114.8 234.0,-129.2 229.7,-131.4" fill="var(--c-trunk)"/><polygon points="238.3,-117.0 234.0,-114.8 234.0,-129.2 238.3,-131.4" fill="var(--c-trunk)"/><circle cx="234.0" cy="-141.3" r="13.0" fill="var(--c-leaf)"/><circle cx="230.4" cy="-144.9" r="6.5" fill="var(--c-leaf-hi)"/><a href="#education" class="city-link" data-building="hsg" aria-label="University — jump to section"><title>University</title><g class="bld"><polygon points="85.5,-117.3 184.5,-67.8 105.3,-28.2 6.3,-77.7" fill="#aac4d4"/><polygon points="6.3,-52.6 105.3,-3.1 105.3,-28.2 6.3,-77.7" fill="#99b0bf"/><polygon points="184.5,-42.8 105.3,-3.1 105.3,-28.2 184.5,-67.8" fill="#8599a5"/><polygon points="6.3,-64.8 105.3,-15.3 105.3,-16.1 6.3,-65.6" fill="#f8f7f2"/><polygon points="184.5,-54.9 105.3,-15.3 105.3,-16.1 184.5,-55.7" fill="#f8f7f2"/><polygon points="85.5,-124.6 188.1,-73.3 105.3,-31.9 2.7,-83.2" fill="#f8f7f2"/><polygon points="2.7,-77.7 105.3,-26.4 105.3,-31.9 2.7,-83.2" fill="#d5d4d0"/><polygon points="188.1,-67.8 105.3,-26.4 105.3,-31.9 188.1,-73.3" fill="#b3b2ae"/><polygon points="92.7,-127.7 173.3,-87.4 105.3,-53.4 24.7,-93.7" fill="#f8f7f2"/><polygon points="24.7,-92.2 105.3,-51.9 105.3,-53.4 24.7,-93.7" fill="#d5d4d0"/><polygon points="173.3,-86.0 105.3,-51.9 105.3,-53.4 173.3,-87.4" fill="#b3b2ae"/><polygon points="92.7,-145.3 170.1,-106.6 105.3,-74.2 27.9,-112.9" fill="#aac4d4"/><polygon points="27.9,-92.2 105.3,-53.5 105.3,-74.2 27.9,-112.9" fill="#99b0bf"/><polygon points="170.1,-86.0 105.3,-53.5 105.3,-74.2 170.1,-106.6" fill="#8599a5"/><polygon points="27.9,-102.2 105.3,-63.5 105.3,-64.2 27.9,-102.9" fill="#f8f7f2"/><polygon points="170.1,-95.9 105.3,-63.5 105.3,-64.2 170.1,-96.6" fill="#f8f7f2"/><polygon points="92.7,-151.6 173.7,-111.1 105.3,-76.9 24.3,-117.4" fill="#f8f7f2"/><polygon points="24.3,-112.9 105.3,-72.4 105.3,-76.9 24.3,-117.4" fill="#d5d4d0"/><polygon points="173.7,-106.6 105.3,-72.4 105.3,-76.9 173.7,-111.1" fill="#b3b2ae"/><polygon points="100.8,-127.3 161.6,-96.8 108.0,-70.0 47.2,-100.4" fill="#f8f7f2"/><polygon points="47.2,-99.0 108.0,-68.6 108.0,-70.0 47.2,-100.4" fill="#d5d4d0"/><polygon points="161.6,-95.4 108.0,-68.6 108.0,-70.0 161.6,-96.8" fill="#b3b2ae"/><polygon points="100.8,-141.9 158.4,-113.1 108.0,-87.9 50.4,-116.7" fill="#aac4d4"/><polygon points="50.4,-99.0 108.0,-70.2 108.0,-87.9 50.4,-116.7" fill="#99b0bf"/><polygon points="158.4,-95.4 108.0,-70.2 108.0,-87.9 158.4,-113.1" fill="#8599a5"/><polygon points="50.4,-107.5 108.0,-78.7 108.0,-79.4 50.4,-108.2" fill="#f8f7f2"/><polygon points="158.4,-103.9 108.0,-78.7 108.0,-79.4 158.4,-104.6" fill="#f8f7f2"/><polygon points="100.8,-147.6 162.0,-117.0 108.0,-90.0 46.8,-120.6" fill="#f8f7f2"/><polygon points="46.8,-116.7 108.0,-86.1 108.0,-90.0 46.8,-120.6" fill="#d5d4d0"/><polygon points="162.0,-113.1 108.0,-86.1 108.0,-90.0 162.0,-117.0" fill="#b3b2ae"/><polygon points="97.2,-152.5 140.0,-131.0 100.8,-111.4 58.0,-132.8" fill="#f8f7f2"/><polygon points="58.0,-131.4 100.8,-110.0 100.8,-111.4 58.0,-132.8" fill="#d5d4d0"/><polygon points="140.0,-129.6 100.8,-110.0 100.8,-111.4 140.0,-131.0" fill="#b3b2ae"/><polygon points="97.2,-164.2 136.8,-144.4 100.8,-126.4 61.2,-146.2" fill="#aac4d4"/><polygon points="61.2,-131.4 100.8,-111.6 100.8,-126.4 61.2,-146.2" fill="#99b0bf"/><polygon points="136.8,-129.6 100.8,-111.6 100.8,-126.4 136.8,-144.4" fill="#8599a5"/><polygon points="61.2,-138.4 100.8,-118.6 100.8,-119.3 61.2,-139.1" fill="#f8f7f2"/><polygon points="136.8,-136.6 100.8,-118.6 100.8,-119.3 136.8,-137.3" fill="#f8f7f2"/><polygon points="97.2,-169.2 140.4,-147.6 100.8,-127.8 57.6,-149.4" fill="#f8f7f2"/><polygon points="57.6,-146.2 100.8,-124.6 100.8,-127.8 57.6,-149.4" fill="#d5d4d0"/><polygon points="140.4,-144.4 100.8,-124.6 100.8,-127.8 140.4,-147.6" fill="#b3b2ae"/><polygon points="43.2,-34.2 68.4,-21.6 68.4,-39.6 43.2,-52.2" fill="#3a4651"/><polygon points="39.6,-58.1 72.0,-41.9 55.8,-33.8 23.4,-50.0" fill="#f8f7f2"/><polygon points="23.4,-48.6 55.8,-32.4 55.8,-33.8 23.4,-50.0" fill="#d5d4d0"/><polygon points="72.0,-40.5 55.8,-32.4 55.8,-33.8 72.0,-41.9" fill="#b3b2ae"/></g><g class="lbl" aria-hidden="true"><rect x="49.8" y="-193.4" width="102.0" height="26" rx="13"/><text x="100.8" y="-176.4" text-anchor="middle">University</text></g></a><polygon points="306.0,-97.6 310.3,-95.4 306.0,-93.2 301.7,-95.4" fill="var(--c-trunk)"/><polygon points="301.7,-81.0 306.0,-78.8 306.0,-93.2 301.7,-95.4" fill="var(--c-trunk)"/><polygon points="310.3,-81.0 306.0,-78.8 306.0,-93.2 310.3,-95.4" fill="var(--c-trunk)"/><circle cx="306.0" cy="-105.3" r="13.0" fill="var(--c-leaf)"/><circle cx="302.4" cy="-108.9" r="6.5" fill="var(--c-leaf-hi)"/><polygon points="-61.2,-58.5 -55.8,-55.8 -61.2,-53.1 -66.6,-55.8" fill="#2c3036"/><polygon points="-66.6,-54.0 -61.2,-51.3 -61.2,-53.1 -66.6,-55.8" fill="#26292e"/><polygon points="-55.8,-54.0 -61.2,-51.3 -61.2,-53.1 -55.8,-55.8" fill="#202327"/><polygon points="-61.2,-96.5 -59.0,-95.4 -61.2,-94.3 -63.4,-95.4" fill="#2c3036"/><polygon points="-63.4,-55.8 -61.2,-54.7 -61.2,-94.3 -63.4,-95.4" fill="#282b31"/><polygon points="-59.0,-55.8 -61.2,-54.7 -61.2,-94.3 -59.0,-95.4" fill="#212428"/><polygon points="-61.7,-112.2 -56.3,-109.5 -60.7,-107.4 -66.1,-110.1" fill="#2c3036"/><polygon points="-66.1,-94.8 -60.7,-92.1 -60.7,-107.4 -66.1,-110.1" fill="#26292e"/><polygon points="-56.3,-94.2 -60.7,-92.1 -60.7,-107.4 -56.3,-109.5" fill="#202327"/><circle cx="-58.5" cy="-105.5" r="1.8" fill="#ff3636"/><circle cx="-58.5" cy="-100.8" r="1.8" fill="#ffcc44"/><circle cx="-58.5" cy="-96.1" r="1.8" fill="#4cdb5c"/><polygon points="378.0,-61.6 382.3,-59.4 378.0,-57.2 373.7,-59.4" fill="var(--c-trunk)"/><polygon points="373.7,-45.0 378.0,-42.8 378.0,-57.2 373.7,-59.4" fill="var(--c-trunk)"/><polygon points="382.3,-45.0 378.0,-42.8 378.0,-57.2 382.3,-59.4" fill="var(--c-trunk)"/><circle cx="378.0" cy="-69.3" r="13.0" fill="var(--c-leaf)"/><circle cx="374.4" cy="-72.9" r="6.5" fill="var(--c-leaf-hi)"/><a href="#microsoft" class="city-link" data-building="microsoft" aria-label="Microsoft — jump to section"><title>Microsoft</title><g class="bld"><polygon points="224.1,-13.0 260.1,5.0 206.1,32.0 170.1,14.0" fill="#ffffff"/><polygon points="170.1,18.5 206.1,36.5 206.1,32.0 170.1,14.0" fill="#dbdbdb"/><polygon points="260.1,9.5 206.1,36.5 206.1,32.0 260.1,5.0" fill="#b8b8b8"/><polygon points="224.1,-31.1 256.5,-14.9 206.1,10.3 173.7,-5.9" fill="#9ec1d3"/><polygon points="173.7,13.9 206.1,30.1 206.1,10.3 173.7,-5.9" fill="#8eaebe"/><polygon points="256.5,4.9 206.1,30.1 206.1,10.3 256.5,-14.9" fill="#7b97a5"/><polygon points="224.1,-36.4 260.1,-18.4 206.1,8.6 170.1,-9.4" fill="#ffffff"/><polygon points="170.1,-5.9 206.1,12.1 206.1,8.6 170.1,-9.4" fill="#dbdbdb"/><polygon points="260.1,-14.9 206.1,12.1 206.1,8.6 260.1,-18.4" fill="#b8b8b8"/><polygon points="261.0,-1.8 352.8,44.1 286.2,77.4 194.4,31.5" fill="#ffffff"/><polygon points="194.4,36.9 286.2,82.8 286.2,77.4 194.4,31.5" fill="#dbdbdb"/><polygon points="352.8,49.5 286.2,82.8 286.2,77.4 352.8,44.1" fill="#b8b8b8"/><polygon points="261.0,-17.4 347.4,25.8 286.2,56.4 199.8,13.2" fill="#9ec1d3"/><polygon points="199.8,31.5 286.2,74.7 286.2,56.4 199.8,13.2" fill="#8eaebe"/><polygon points="347.4,44.1 286.2,74.7 286.2,56.4 347.4,25.8" fill="#7b97a5"/><polygon points="261.0,-24.3 351.0,20.7 286.2,53.1 196.2,8.1" fill="#ffffff"/><polygon points="196.2,13.2 286.2,58.2 286.2,53.1 196.2,8.1" fill="#dbdbdb"/><polygon points="351.0,25.8 286.2,58.2 286.2,53.1 351.0,20.7" fill="#b8b8b8"/><polygon points="261.0,-40.8 347.4,2.4 286.2,33.0 199.8,-10.2" fill="#9ec1d3"/><polygon points="199.8,8.1 286.2,51.3 286.2,33.0 199.8,-10.2" fill="#8eaebe"/><polygon points="347.4,20.7 286.2,51.3 286.2,33.0 347.4,2.4" fill="#7b97a5"/><polygon points="261.0,-47.7 351.0,-2.7 286.2,29.7 196.2,-15.3" fill="#ffffff"/><polygon points="196.2,-10.2 286.2,34.8 286.2,29.7 196.2,-15.3" fill="#dbdbdb"/><polygon points="351.0,2.4 286.2,34.8 286.2,29.7 351.0,-2.7" fill="#b8b8b8"/><polygon points="268.5,-54.9 328.9,-24.7 278.7,0.4 218.3,-29.8" fill="#9ec1d3"/><polygon points="218.3,-11.6 278.7,18.7 278.7,0.4 218.3,-29.8" fill="#8eaebe"/><polygon points="328.9,-6.4 278.7,18.7 278.7,0.4 328.9,-24.7" fill="#7b97a5"/><polygon points="268.5,-61.9 332.5,-29.8 278.7,-2.9 214.7,-35.0" fill="#ffffff"/><polygon points="214.7,-29.8 278.7,2.2 278.7,-2.9 214.7,-35.0" fill="#dbdbdb"/><polygon points="332.5,-24.7 278.7,2.2 278.7,-2.9 332.5,-29.8" fill="#b8b8b8"/><polygon points="268.5,-65.0 333.4,-32.5 278.7,-5.2 213.8,-37.7" fill="#e8e8e8"/><polygon points="213.8,-35.0 278.7,-2.5 278.7,-5.2 213.8,-37.7" fill="#c8c8c8"/><polygon points="333.4,-29.8 278.7,-2.5 278.7,-5.2 333.4,-32.5" fill="#a7a7a7"/><polygon points="236.4,14.0 242.5,17.1 242.5,10.9 236.4,7.9" fill="#f25022"/><polygon points="243.5,17.5 249.6,20.6 249.6,14.4 243.5,11.4" fill="#7fba00"/><polygon points="236.4,21.0 242.5,24.1 242.5,18.0 236.4,14.9" fill="#00a4ef"/><polygon points="243.5,24.5 249.6,27.6 249.6,21.5 243.5,18.4" fill="#ffb900"/><polygon points="226.8,45.0 259.2,61.2 259.2,45.0 226.8,28.8" fill="#7e9aa9"/><polygon points="221.4,23.9 264.6,45.5 250.2,52.7 207.0,31.1" fill="#ffffff"/><polygon points="207.0,33.3 250.2,54.9 250.2,52.7 207.0,31.1" fill="#dbdbdb"/><polygon points="264.6,47.7 250.2,54.9 250.2,52.7 264.6,45.5" fill="#b8b8b8"/></g><g class="lbl" aria-hidden="true"><rect x="226.4" y="-80.0" width="94.4" height="26" rx="13"/><text x="273.6" y="-63.0" text-anchor="middle">Microsoft</text></g></a><polygon points="468.0,1.4 472.3,3.6 468.0,5.8 463.7,3.6" fill="var(--c-trunk)"/><polygon points="463.7,18.0 468.0,20.2 468.0,5.8 463.7,3.6" fill="var(--c-trunk)"/><polygon points="472.3,18.0 468.0,20.2 468.0,5.8 472.3,3.6" fill="var(--c-trunk)"/><circle cx="468.0" cy="-6.3" r="13.0" fill="var(--c-leaf)"/><circle cx="464.4" cy="-9.9" r="6.5" fill="var(--c-leaf-hi)"/><polygon points="378.0,46.4 382.3,48.6 378.0,50.8 373.7,48.6" fill="var(--c-trunk)"/><polygon points="373.7,63.0 378.0,65.2 378.0,50.8 373.7,48.6" fill="var(--c-trunk)"/><polygon points="382.3,63.0 378.0,65.2 378.0,50.8 382.3,48.6" fill="var(--c-trunk)"/><circle cx="378.0" cy="38.7" r="13.0" fill="var(--c-leaf)"/><circle cx="374.4" cy="35.1" r="6.5" fill="var(--c-leaf-hi)"/><polygon points="306.0,82.4 310.3,84.6 306.0,86.8 301.7,84.6" fill="var(--c-trunk)"/><polygon points="301.7,99.0 306.0,101.2 306.0,86.8 301.7,84.6" fill="var(--c-trunk)"/><polygon points="310.3,99.0 306.0,101.2 306.0,86.8 310.3,84.6" fill="var(--c-trunk)"/><circle cx="306.0" cy="74.7" r="13.0" fill="var(--c-leaf)"/><circle cx="302.4" cy="71.1" r="6.5" fill="var(--c-leaf-hi)"/></g><g class="cars" clip-path="url(#city-clip)"><g class="car car-east"><polygon points="-179.5,-98.7 -173.0,-95.5 -175.1,-94.4 -181.6,-97.6" fill="#171717"/><polygon points="-181.6,-91.5 -175.1,-88.3 -175.1,-94.4 -181.6,-97.6" fill="#121212"/><polygon points="-173.0,-89.4 -175.1,-88.3 -175.1,-94.4 -173.0,-95.5" fill="#0e0e0e"/><polygon points="-165.1,-105.9 -158.6,-102.7 -160.7,-101.6 -167.2,-104.8" fill="#171717"/><polygon points="-167.2,-98.7 -160.7,-95.5 -160.7,-101.6 -167.2,-104.8" fill="#121212"/><polygon points="-158.6,-96.6 -160.7,-95.5 -160.7,-101.6 -158.6,-102.7" fill="#0e0e0e"/><polygon points="-199.3,-108.6 -192.8,-105.4 -194.9,-104.3 -201.4,-107.5" fill="#171717"/><polygon points="-201.4,-101.4 -194.9,-98.2 -194.9,-104.3 -201.4,-107.5" fill="#121212"/><polygon points="-192.8,-99.3 -194.9,-98.2 -194.9,-104.3 -192.8,-105.4" fill="#0e0e0e"/><polygon points="-184.9,-115.8 -178.4,-112.6 -180.5,-111.5 -187.0,-114.8" fill="#171717"/><polygon points="-187.0,-108.6 -180.5,-105.4 -180.5,-111.5 -187.0,-114.8" fill="#121212"/><polygon points="-178.4,-106.5 -180.5,-105.4 -180.5,-111.5 -178.4,-112.6" fill="#0e0e0e"/><polygon points="-188.1,-119.2 -157.5,-104.0 -171.9,-96.8 -202.5,-112.0" fill="#d93838"/><polygon points="-202.5,-105.8 -171.9,-90.5 -171.9,-96.8 -202.5,-112.0" fill="#bb3030"/><polygon points="-157.5,-97.7 -171.9,-90.5 -171.9,-96.8 -157.5,-104.0" fill="#9c2828"/><polygon points="-183.4,-122.0 -166.3,-113.4 -179.3,-106.9 -196.4,-115.5" fill="#2a3540"/><polygon points="-196.4,-109.7 -179.3,-101.2 -179.3,-106.9 -196.4,-115.5" fill="#242e37"/><polygon points="-166.3,-107.6 -179.3,-101.2 -179.3,-106.9 -166.3,-113.4" fill="#1e262e"/><polygon points="-166.7,-108.4 -178.9,-102.2 -178.9,-106.6 -166.7,-112.7" fill="#b8cfdc"/><polygon points="-196.4,-110.6 -179.3,-102.1 -179.3,-106.4 -196.4,-114.9" fill="#9cb0bb"/><polygon points="-158.2,-99.6 -161.1,-98.2 -161.1,-100.3 -158.2,-101.8" fill="#ffe9a8"/><polygon points="-168.3,-94.6 -171.2,-93.2 -171.2,-95.3 -168.3,-96.8" fill="#ffe9a8"/></g><g class="car car-west"><polygon points="135.5,76.8 142.0,80.0 139.9,81.1 133.4,77.9" fill="#171717"/><polygon points="133.4,84.0 139.9,87.2 139.9,81.1 133.4,77.9" fill="#121212"/><polygon points="142.0,86.1 139.9,87.2 139.9,81.1 142.0,80.0" fill="#0e0e0e"/><polygon points="149.9,69.6 156.4,72.8 154.3,73.9 147.8,70.7" fill="#171717"/><polygon points="147.8,76.8 154.3,80.0 154.3,73.9 147.8,70.7" fill="#121212"/><polygon points="156.4,78.9 154.3,80.0 154.3,73.9 156.4,72.8" fill="#0e0e0e"/><polygon points="115.7,66.9 122.2,70.1 120.1,71.2 113.6,68.0" fill="#171717"/><polygon points="113.6,74.1 120.1,77.3 120.1,71.2 113.6,68.0" fill="#121212"/><polygon points="122.2,76.2 120.1,77.3 120.1,71.2 122.2,70.1" fill="#0e0e0e"/><polygon points="130.1,59.7 136.6,62.9 134.5,64.0 128.0,60.8" fill="#171717"/><polygon points="128.0,66.9 134.5,70.1 134.5,64.0 128.0,60.8" fill="#121212"/><polygon points="136.6,69.0 134.5,70.1 134.5,64.0 136.6,62.9" fill="#0e0e0e"/><polygon points="126.9,56.2 157.5,71.5 143.1,78.8 112.5,63.5" fill="#2c6fd0"/><polygon points="112.5,69.8 143.1,85.0 143.1,78.8 112.5,63.5" fill="#265fb3"/><polygon points="157.5,77.8 143.1,85.0 143.1,78.8 157.5,71.5" fill="#205096"/><polygon points="131.6,53.5 148.7,62.1 135.7,68.6 118.6,60.0" fill="#2a3540"/><polygon points="118.6,65.8 135.7,74.3 135.7,68.6 118.6,60.0" fill="#242e37"/><polygon points="148.7,67.9 135.7,74.3 135.7,68.6 148.7,62.1" fill="#1e262e"/><polygon points="148.3,67.1 136.1,73.3 136.1,68.9 148.3,62.8" fill="#b8cfdc"/><polygon points="118.6,64.9 135.7,73.4 135.7,69.1 118.6,60.6" fill="#9cb0bb"/><polygon points="156.8,75.9 153.9,77.3 153.9,75.2 156.8,73.7" fill="#e0342c"/><polygon points="146.7,80.9 143.8,82.3 143.8,80.2 146.7,78.7" fill="#e0342c"/></g></g><g class="city-south"><polygon points="-306.0,-115.6 -301.7,-113.4 -306.0,-111.2 -310.3,-113.4" fill="var(--c-trunk)"/><polygon points="-310.3,-99.0 -306.0,-96.8 -306.0,-111.2 -310.3,-113.4" fill="var(--c-trunk)"/><polygon points="-301.7,-99.0 -306.0,-96.8 -306.0,-111.2 -301.7,-113.4" fill="var(--c-trunk)"/><circle cx="-306.0" cy="-123.3" r="13.0" fill="var(--c-leaf)"/><circle cx="-309.6" cy="-126.9" r="6.5" fill="var(--c-leaf-hi)"/><a href="#coding" class="city-link" data-building="coding" aria-label="Coding Project — jump to section"><title>Coding Project</title><g class="bld"><polygon points="-273.6,-111.6 -216.0,-82.8 -273.6,-54.0 -331.2,-82.8" fill="#faf7f0"/><polygon points="-331.2,-43.2 -273.6,-14.4 -273.6,-54.0 -331.2,-82.8" fill="#d7d4ce"/><polygon points="-216.0,-43.2 -273.6,-14.4 -273.6,-54.0 -216.0,-82.8" fill="#b4b2ad"/><polygon points="-324.0,-48.6 -291.6,-32.4 -291.6,-55.8 -324.0,-72.0" fill="#b8cfdc"/><polygon points="-287.1,-21.1 -277.2,-16.2 -277.2,-37.8 -287.1,-42.8" fill="#e08c3c"/><polygon points="-288.0,-136.8 -244.8,-115.2 -288.0,-93.6 -331.2,-115.2" fill="#4fa8a0"/><polygon points="-331.2,-82.8 -288.0,-61.2 -288.0,-93.6 -331.2,-115.2" fill="#44908a"/><polygon points="-244.8,-82.8 -288.0,-61.2 -288.0,-93.6 -244.8,-115.2" fill="#397973"/><polygon points="-245.7,-114.8 -222.3,-103.0 -245.7,-91.3 -269.1,-103.1" fill="#f3c969"/><polygon points="-269.1,-79.7 -245.7,-67.9 -245.7,-91.3 -269.1,-103.1" fill="#d1ad5a"/><polygon points="-222.3,-79.7 -245.7,-67.9 -245.7,-91.3 -222.3,-103.0" fill="#af914c"/><polygon points="-288.0,-126.0 -266.4,-115.2 -288.0,-104.4 -309.6,-115.2" fill="#b8cfdc"/></g><g class="lbl" aria-hidden="true"><rect x="-339.8" y="-162.8" width="132.4" height="26" rx="13"/><text x="-273.6" y="-145.8" text-anchor="middle">Coding Project</text></g></a><polygon points="-378.0,-79.6 -373.7,-77.4 -378.0,-75.2 -382.3,-77.4" fill="var(--c-trunk)"/><polygon points="-382.3,-63.0 -378.0,-60.8 -378.0,-75.2 -382.3,-77.4" fill="var(--c-trunk)"/><polygon points="-373.7,-63.0 -378.0,-60.8 -378.0,-75.2 -373.7,-77.4" fill="var(--c-trunk)"/><circle cx="-378.0" cy="-87.3" r="13.0" fill="var(--c-leaf)"/><circle cx="-381.6" cy="-90.9" r="6.5" fill="var(--c-leaf-hi)"/><polygon points="-468.0,-34.6 -463.7,-32.4 -468.0,-30.2 -472.3,-32.4" fill="var(--c-trunk)"/><polygon points="-472.3,-18.0 -468.0,-15.8 -468.0,-30.2 -472.3,-32.4" fill="var(--c-trunk)"/><polygon points="-463.7,-18.0 -468.0,-15.8 -468.0,-30.2 -463.7,-32.4" fill="var(--c-trunk)"/><circle cx="-468.0" cy="-42.3" r="13.0" fill="var(--c-leaf)"/><circle cx="-471.6" cy="-45.9" r="6.5" fill="var(--c-leaf-hi)"/><a href="#badminton" class="city-link" data-building="badminton" aria-label="Badminton — jump to section"><title>Badminton</title><g class="bld"><polygon points="-135.9,-19.4 -107.1,-5.0 -150.3,16.6 -179.1,2.2" fill="#f3d5b8"/><polygon points="-179.1,32.8 -150.3,47.2 -150.3,16.6 -179.1,2.2" fill="#d1b79e"/><polygon points="-107.1,25.6 -150.3,47.2 -150.3,16.6 -107.1,-5.0" fill="#af9984"/><polygon points="-175.5,34.6 -153.9,45.4 -153.9,23.8 -175.5,13.0" fill="#e8e2d3"/><polygon points="-135.9,-23.7 -102.6,-7.0 -150.3,16.8 -183.6,0.2" fill="#c85a47"/><polygon points="-183.6,2.3 -150.3,19.0 -150.3,16.8 -183.6,0.2" fill="#ac4d3d"/><polygon points="-102.6,-4.9 -150.3,19.0 -150.3,16.8 -102.6,-7.0" fill="#904133"/><polygon points="-100.8,-21.6 -43.2,7.2 -100.8,36.0 -158.4,7.2" fill="#f3d5b8"/><polygon points="-158.4,50.4 -100.8,79.2 -100.8,36.0 -158.4,7.2" fill="#d1b79e"/><polygon points="-43.2,50.4 -100.8,79.2 -100.8,36.0 -43.2,7.2" fill="#af9984"/><polygon points="-149.4,33.3 -139.5,38.2 -139.5,28.3 -149.4,23.4" fill="#b8cfdc"/><polygon points="-115.2,50.4 -105.3,55.3 -105.3,45.4 -115.2,40.5" fill="#b8cfdc"/><polygon points="-127.4,65.9 -117.4,70.9 -117.4,49.3 -127.4,44.3" fill="#8b7355"/><polygon points="-66.6,40.5 -77.4,45.9 -77.4,36.0 -66.6,30.6" fill="#9cb0bb"/><polygon points="-171.0,7.2 -100.8,42.3 -100.8,-19.8" fill="#b45140"/><polygon points="-30.6,7.2 -100.8,42.3 -100.8,-19.8" fill="#944335"/><polygon points="-131.4,61.7 -115.2,69.8 -122.4,73.4 -138.6,65.3" fill="#eae6dd"/><polygon points="-138.6,67.5 -122.4,75.6 -122.4,73.4 -138.6,65.3" fill="#c9c6be"/><polygon points="-115.2,72.0 -122.4,75.6 -122.4,73.4 -115.2,69.8" fill="#a8a69f"/><g transform="matrix(18.0,9.0,-18.0,9.0,-46.8,68.0) rotate(-25)"><line x1="0" y1="0.05" x2="0" y2="1.05" stroke="#2b2b2b" stroke-width="0.14" stroke-linecap="round"/><ellipse cx="0" cy="1.5" rx="0.42" ry="0.5" fill="#f7f7f2" stroke="#d23440" stroke-width="0.09"/><path d="M-0.3,1.5 H0.3 M-0.2,1.25 H0.2 M-0.2,1.75 H0.2 M0,1.05 V1.95 M-0.18,1.1 V1.9 M0.18,1.1 V1.9" stroke="#cfcfc9" stroke-width="0.03" fill="none"/></g></g><g class="lbl" aria-hidden="true"><rect x="-148.0" y="-67.4" width="94.4" height="26" rx="13"/><text x="-100.8" y="-50.4" text-anchor="middle">Badminton</text></g></a><polygon points="-378.0,28.4 -373.7,30.6 -378.0,32.8 -382.3,30.6" fill="var(--c-trunk)"/><polygon points="-382.3,45.0 -378.0,47.2 -378.0,32.8 -382.3,30.6" fill="var(--c-trunk)"/><polygon points="-373.7,45.0 -378.0,47.2 -378.0,32.8 -373.7,30.6" fill="var(--c-trunk)"/><circle cx="-378.0" cy="20.7" r="13.0" fill="var(--c-leaf)"/><circle cx="-381.6" cy="17.1" r="6.5" fill="var(--c-leaf-hi)"/><polygon points="-306.0,64.4 -301.7,66.6 -306.0,68.8 -310.3,66.6" fill="var(--c-trunk)"/><polygon points="-310.3,81.0 -306.0,83.2 -306.0,68.8 -310.3,66.6" fill="var(--c-trunk)"/><polygon points="-301.7,81.0 -306.0,83.2 -306.0,68.8 -301.7,66.6" fill="var(--c-trunk)"/><circle cx="-306.0" cy="56.7" r="13.0" fill="var(--c-leaf)"/><circle cx="-309.6" cy="53.1" r="6.5" fill="var(--c-leaf-hi)"/><a href="#contact" class="city-link" data-building="contact" aria-label="Contact — jump to section"><title>Contact</title><g class="bld"><polygon points="42.3,64.3 74.7,80.6 35.1,100.4 2.7,84.2" fill="#d8e5ca"/><polygon points="2.7,118.4 35.1,134.6 35.1,100.4 2.7,84.2" fill="#bac5ae"/><polygon points="74.7,114.8 35.1,134.6 35.1,100.4 74.7,80.6" fill="#9ca591"/><polygon points="15.3,108.5 22.5,112.0 22.5,104.8 15.3,101.2" fill="#b8cfdc"/><polygon points="-8.1,84.2 35.1,105.8 38.7,67.1" fill="#c5827a"/><polygon points="85.5,80.6 35.1,105.8 38.7,67.1" fill="#a26b65"/><polygon points="81.0,69.3 138.6,98.1 91.8,121.5 34.2,92.7" fill="#d8e5ca"/><polygon points="34.2,134.1 91.8,162.9 91.8,121.5 34.2,92.7" fill="#bac5ae"/><polygon points="138.6,139.5 91.8,162.9 91.8,121.5 138.6,98.1" fill="#9ca591"/><polygon points="43.2,117.9 53.1,122.9 53.1,113.0 43.2,108.0" fill="#b8cfdc"/><polygon points="77.4,134.1 85.5,138.2 85.5,130.1 77.4,126.0" fill="#b8cfdc"/><polygon points="62.1,148.1 72.9,153.5 72.9,132.8 62.1,127.4" fill="#8b7355"/><polygon points="122.4,126.9 111.6,132.3 111.6,122.4 122.4,117.0" fill="#9cb0bb"/><polygon points="21.6,92.7 91.8,127.8 86.4,72.9" fill="#c5827a"/><polygon points="151.2,98.1 91.8,127.8 86.4,72.9" fill="#a26b65"/><polygon points="102.6,63.0 108.0,65.7 102.6,68.4 97.2,65.7" fill="#eae6dd"/><polygon points="97.2,83.2 102.6,85.9 102.6,68.4 97.2,65.7" fill="#c9c6be"/><polygon points="108.0,83.2 102.6,85.9 102.6,68.4 108.0,65.7" fill="#a8a69f"/><polygon points="58.5,144.1 76.5,153.1 69.3,156.7 51.3,147.7" fill="#eae6dd"/><polygon points="51.3,149.8 69.3,158.8 69.3,156.7 51.3,147.7" fill="#c9c6be"/><polygon points="76.5,155.2 69.3,158.8 69.3,156.7 76.5,153.1" fill="#a8a69f"/></g><g class="lbl" aria-hidden="true"><rect x="46.8" y="24.4" width="79.2" height="26" rx="13"/><text x="86.4" y="41.4" text-anchor="middle">Contact</text></g></a><polygon points="-234.0,100.4 -229.7,102.6 -234.0,104.8 -238.3,102.6" fill="var(--c-trunk)"/><polygon points="-238.3,117.0 -234.0,119.2 -234.0,104.8 -238.3,102.6" fill="var(--c-trunk)"/><polygon points="-229.7,117.0 -234.0,119.2 -234.0,104.8 -229.7,102.6" fill="var(--c-trunk)"/><circle cx="-234.0" cy="92.7" r="13.0" fill="var(--c-leaf)"/><circle cx="-237.6" cy="89.1" r="6.5" fill="var(--c-leaf-hi)"/><polygon points="198.0,136.4 202.3,138.6 198.0,140.8 193.7,138.6" fill="var(--c-trunk)"/><polygon points="193.7,153.0 198.0,155.2 198.0,140.8 193.7,138.6" fill="var(--c-trunk)"/><polygon points="202.3,153.0 198.0,155.2 198.0,140.8 202.3,138.6" fill="var(--c-trunk)"/><circle cx="198.0" cy="128.7" r="13.0" fill="var(--c-leaf)"/><circle cx="194.4" cy="125.1" r="6.5" fill="var(--c-leaf-hi)"/><polygon points="-162.0,136.4 -157.7,138.6 -162.0,140.8 -166.3,138.6" fill="var(--c-trunk)"/><polygon points="-166.3,153.0 -162.0,155.2 -162.0,140.8 -166.3,138.6" fill="var(--c-trunk)"/><polygon points="-157.7,153.0 -162.0,155.2 -162.0,140.8 -157.7,138.6" fill="var(--c-trunk)"/><circle cx="-162.0" cy="128.7" r="13.0" fill="var(--c-leaf)"/><circle cx="-165.6" cy="125.1" r="6.5" fill="var(--c-leaf-hi)"/><polygon points="126.0,172.4 130.3,174.6 126.0,176.8 121.7,174.6" fill="var(--c-trunk)"/><polygon points="121.7,189.0 126.0,191.2 126.0,176.8 121.7,174.6" fill="var(--c-trunk)"/><polygon points="130.3,189.0 126.0,191.2 126.0,176.8 130.3,174.6" fill="var(--c-trunk)"/><circle cx="126.0" cy="164.7" r="13.0" fill="var(--c-leaf)"/><circle cx="122.4" cy="161.1" r="6.5" fill="var(--c-leaf-hi)"/><polygon points="-90.0,172.4 -85.7,174.6 -90.0,176.8 -94.3,174.6" fill="var(--c-trunk)"/><polygon points="-94.3,189.0 -90.0,191.2 -90.0,176.8 -94.3,174.6" fill="var(--c-trunk)"/><polygon points="-85.7,189.0 -90.0,191.2 -90.0,176.8 -85.7,174.6" fill="var(--c-trunk)"/><circle cx="-90.0" cy="164.7" r="13.0" fill="var(--c-leaf)"/><circle cx="-93.6" cy="161.1" r="6.5" fill="var(--c-leaf-hi)"/><polygon points="36.0,217.4 40.3,219.6 36.0,221.8 31.7,219.6" fill="var(--c-trunk)"/><polygon points="31.7,234.0 36.0,236.2 36.0,221.8 31.7,219.6" fill="var(--c-trunk)"/><polygon points="40.3,234.0 36.0,236.2 36.0,221.8 40.3,219.6" fill="var(--c-trunk)"/><circle cx="36.0" cy="209.7" r="13.0" fill="var(--c-leaf)"/><circle cx="32.4" cy="206.1" r="6.5" fill="var(--c-leaf-hi)"/></g></svg>
+      </div>
+      <p class="hint">Click a building to explore</p>
+    </section>
+
+    <!-- ===================== About ===================== -->
+    <section class="section" id="about" aria-labelledby="about-title">
+      <div class="container section-grid">
+        <div class="section-head reveal">
+          <p class="eyebrow">The Residence</p>
+          <h2 id="about-title">About Me</h2>
+        </div>
+        <div class="section-body reveal">
+          <p class="prose-lg">I'm Philip — an Economic Sciences student at the University of St.&nbsp;Gallen,
+            focused on consulting and strategic management. My work sits at the intersection
+            of analytical thinking and practical problem-solving.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== Education ===================== -->
+    <section class="section" id="education" aria-labelledby="education-title">
+      <div class="container section-grid">
+        <div class="section-head reveal">
+          <h2 id="education-title">Education</h2>
+        </div>
+        <div class="section-body">
+          <article class="card reveal" id="hsg">
+            <header class="card-head">
+              <h3>University of St. Gallen</h3>
+              <p class="date"><time datetime="2018">2018</time> — present</p>
+            </header>
+            <p>Studying Economic Sciences with a focus on consulting and strategic management.
+              Coursework spans macroeconomics, corporate finance, and organizational strategy.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== Experience ===================== -->
+    <section class="section" id="experience" aria-labelledby="experience-title">
+      <div class="container section-grid">
+        <div class="section-head reveal">
+          <h2 id="experience-title">Experience</h2>
+        </div>
+        <div class="section-body">
+          <ol class="timeline">
+            <li class="timeline-item reveal" id="badminton">
+              <article class="card">
+                <header class="card-head">
+                  <h3>Badminton — Player &amp; Head Coach</h3>
+                  <p class="date"><time datetime="2018-01">Jan 2018</time> — <time datetime="2024-05">May 2024</time></p>
+                </header>
+                <p>Competed at a semi-professional level while serving as head coach.
+                  Developed leadership, performance analysis, and mentorship skills
+                  alongside the athletic discipline.</p>
+              </article>
+            </li>
+            <li class="timeline-item reveal" id="coding">
+              <article class="card">
+                <header class="card-head">
+                  <h3>Collaborative Coding Project</h3>
+                  <p class="date"><time datetime="2023-05">May 2023</time> — <time datetime="2023-06">Jun 2023</time></p>
+                </header>
+                <p>Led a globally distributed coding project, coordinating across time zones
+                  and skill levels to ship a working product. Sharpened problem-solving and
+                  cross-cultural collaboration skills.</p>
+              </article>
+            </li>
+            <li class="timeline-item reveal" id="microsoft">
+              <article class="card">
+                <header class="card-head">
+                  <h3>Microsoft Internship</h3>
+                  <p class="date"><time datetime="2019-06">Jun 2019</time> — <time datetime="2019-07">Jul 2019</time></p>
+                </header>
+                <p>Shadowed consultants at the Microsoft Technology Center. Gained firsthand
+                  insight into how enterprise strategy translates into technology decisions
+                  for large clients.</p>
+              </article>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== Contact ===================== -->
+    <section class="section section-contact" id="contact" aria-labelledby="contact-title">
+      <div class="container section-grid">
+        <div class="section-head reveal">
+          <p class="eyebrow">The Town Hall</p>
+          <h2 id="contact-title">Get in Touch</h2>
+        </div>
+        <div class="section-body reveal">
+          <ul class="contact-list">
+            <li>
+              <span class="contact-label">Email</span>
+              <a href="mailto:Philip@Duelundjensen.com">Philip@Duelundjensen.com</a>
+            </li>
+            <li>
+              <span class="contact-label">LinkedIn</span>
+              <a href="https://www.linkedin.com/in/philip-jensen-407310192/" target="_blank" rel="noopener noreferrer">linkedin.com/Philip-Jensen<span class="visually-hidden"> (opens in a new tab)</span></a>
+            </li>
+            <li>
+              <span class="contact-label">GitHub</span>
+              <a href="https://github.com/jav1i" target="_blank" rel="noopener noreferrer">github.com/Jav1i<span class="visually-hidden"> (opens in a new tab)</span></a>
+            </li>
+            <li>
+              <span class="contact-label">CV</span>
+              <a href="Philip_Jensen_Resume.pdf" download>Download PDF</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <!-- ===== Modals ===== -->
-  <dialog id="modal-about" class="modal">
-    <button class="modal-close" aria-label="Close">&times;</button>
-    <h2>About Me</h2>
-    <p class="eyebrow">The Residence</p>
-    <p>I'm Philip — an Economic Sciences student at the University of St.&nbsp;Gallen,
-      focused on consulting and strategic management. My work sits at the intersection
-      of analytical thinking and practical problem-solving.</p>
-  </dialog>
-
-  <dialog id="modal-hsg" class="modal">
-    <button class="modal-close" aria-label="Close">&times;</button>
-    <h2>University of St. Gallen</h2>
-    <p class="eyebrow">2018 — present</p>
-    <p>Studying Economic Sciences with a focus on consulting and strategic management.
-      Coursework spans macroeconomics, corporate finance, and organizational strategy.</p>
-  </dialog>
-
-  <dialog id="modal-microsoft" class="modal">
-    <button class="modal-close" aria-label="Close">&times;</button>
-    <h2>Microsoft Internship</h2>
-    <p class="eyebrow">Jun 2019 — Jul 2019</p>
-    <p>Shadowed consultants at the Microsoft Technology Center. Gained firsthand
-      insight into how enterprise strategy translates into technology decisions
-      for large clients.</p>
-  </dialog>
-
-  <dialog id="modal-coding" class="modal">
-    <button class="modal-close" aria-label="Close">&times;</button>
-    <h2>Collaborative Coding Project</h2>
-    <p class="eyebrow">May 2023 — Jun 2023</p>
-    <p>Led a globally distributed coding project, coordinating across time zones
-      and skill levels to ship a working product. Sharpened problem-solving and
-      cross-cultural collaboration skills.</p>
-  </dialog>
-
-  <dialog id="modal-badminton" class="modal">
-    <button class="modal-close" aria-label="Close">&times;</button>
-    <h2>Badminton — Player &amp; Head Coach</h2>
-    <p class="eyebrow">Jan 2018 — May 2024</p>
-    <p>Competed at a semi-professional level while serving as head coach.
-      Developed leadership, performance analysis, and mentorship skills
-      alongside the athletic discipline.</p>
-  </dialog>
-
-  <dialog id="modal-contact" class="modal">
-    <button class="modal-close" aria-label="Close">&times;</button>
-    <h2>Get in Touch</h2>
-    <p class="eyebrow">The Town Hall</p>
-    <ul class="contact-list">
-      <li><span>Email</span><a href="mailto:Philip@Duelundjensen.com">Philip@Duelundjensen.com</a></li>
-      <li><span>LinkedIn</span><a href="https://www.linkedin.com/in/philip-jensen-407310192/" target="_blank" rel="noopener">linkedin.com/Philip-Jensen</a></li>
-      <li><span>GitHub</span><a href="https://github.com/jav1i" target="_blank" rel="noopener">github.com/Jav1i</a></li>
-      <li><span>CV</span><a href="Philip_Jensen_Resume.pdf" download>Download PDF</a></li>
-    </ul>
-  </dialog>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
-  <script src="script.js"></script>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>&copy; <span id="year">2026</span> Philip Jensen</p>
+      <ul class="footer-links">
+        <li><a href="mailto:Philip@Duelundjensen.com">Email</a></li>
+        <li><a href="https://www.linkedin.com/in/philip-jensen-407310192/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+        <li><a href="https://github.com/jav1i" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+        <li><a href="#top">Back to top</a></li>
+      </ul>
+    </div>
+  </footer>
 </body>
 </html>
